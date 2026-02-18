@@ -44,8 +44,6 @@ case ":$PATH:" in
 esac
 # pnpm end
 
-export NODE_OPTIONS=--max-old-space-size=4096
-
 # asdf
 export PATH="${ASDF_DATA_DIR:-$HOME/.asdf}/shims:$PATH"
 
