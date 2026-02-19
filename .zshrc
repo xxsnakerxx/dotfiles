@@ -30,8 +30,8 @@ export PATH="/usr/local/bin:$PATH"
 export PATH="/usr/local/sbin:$PATH"
 export PATH="$HOME/.docker/bin:$PATH"
 
-alias zshconfig="code ~/.zshrc"
-alias reload="source ~/.zshrc"
+alias zsh_config="code ~/.zshrc"
+alias zsh_reload="source ~/.zshrc"
 
 export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
