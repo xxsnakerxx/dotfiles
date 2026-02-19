@@ -36,6 +36,8 @@ alias zsh_reload="source ~/.zshrc"
 export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
 
+export HOMEBREW_BUNDLE_FILE=$HOME/.brewfile
+
 # pnpm
 export PNPM_HOME="$HOME/Library/pnpm"
 case ":$PATH:" in
