@@ -1,0 +1,50 @@
+[user]
+	email = xxsnakerxx@gmail.com
+	name = Dmitrii Kolesnikov
+
+[core]
+	autocrlf = input
+  excludesfile = ~/.gitignore_global
+
+[column]
+  ui = auto
+
+[branch]
+  sort = -committerdate
+
+[tag]
+  sort = version:refname
+
+[init]
+  defaultBranch = main
+
+[diff]
+  algorithm = histogram
+  colorMoved = plain
+  mnemonicPrefix = true
+  renames = true
+
+[push]
+  default = simple
+  autoSetupRemote = true
+  followTags = true
+
+[fetch]
+  prune = true
+  pruneTags = true
+  all = true
+
+[alias]
+	append = town append
+	diff-parent = town diff-parent
+	hack = town hack
+	prepend = town prepend
+	propose = town propose
+	repo = town repo
+	ship = town ship
+	sync = town sync
+	delete = town delete
+	rename = town rename
+
+[git-town]
+	ship-delete-tracking-branch = false
