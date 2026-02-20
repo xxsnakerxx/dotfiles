@@ -80,14 +80,14 @@ jobs:
 
           echo "=== ASDF runtimes ==="
           export PATH="$HOME/.asdf/shims:$PATH"
-          node --version
-          ruby --version
+          echo "✅ node version: $(node --version)"
+          echo "✅ ruby version: $(ruby --version)"
 
           echo "=== Oh My Zsh ==="
           test -d ~/.oh-my-zsh && echo "✅ Oh My Zsh installed"
 
           echo "=== macOS defaults (from setup_macos) ==="
-          test "$(defaults read NSGlobalDomain AppleLocale)" = "en_US@currency=EUR"
-          test "$(defaults read NSGlobalDomain AppleMeasurementUnits)" = "Centimeters"
+          test "$(defaults read NSGlobalDomain AppleLocale)" = "en_US@currency=EUR" && echo "✅ AppleLocale OK"
+          test "$(defaults read NSGlobalDomain AppleMeasurementUnits)" = "Centimeters" && echo "✅ AppleMeasurementUnits OK"
 
           echo "✅ Fresh setup verification passed"
