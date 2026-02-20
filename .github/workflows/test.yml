@@ -50,14 +50,10 @@ jobs:
           " > ~/.dotfiles/.brewfile
 
       - name: Run fresh setup
+        shell: zsh {0}
         run: |
           cd ~/.dotfiles
           ./scripts/fresh.sh
-
-      - name: Source zsh
-        shell: zsh {0}
-        run: |
-          source ~/.zshrc
 
       - name: Check if fresh setup completed successfully
         shell: zsh {0}
