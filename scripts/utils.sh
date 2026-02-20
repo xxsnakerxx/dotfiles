@@ -8,6 +8,7 @@ info() {
 
 success() {
   printf "%s✅ %s%s\n" "$(tput setaf 2 2>/dev/null || echo '')" "$1" "$reset_color"
+  printf "\n"
 }
 
 err() {
@@ -49,8 +50,37 @@ update_system() {
   sudo softwareupdate -i -a
 }
 
+# Keep sudo timestamp fresh until the current script exits. Runs in background;
+# when the parent process is gone the loop ends and the job exits (main script continues).
+sudo_keepalive() {
+  while true; do
+    sudo -n true
+    sleep 60
+    kill -0 "$$" || break
+  done 2>/dev/null &
+}
+
 stow_files() {
   info "Stowing files..."
   stow .
   success "Files stowed"
+}
+
+clean_up() {
+  info "Cleaning up..."
+  mo clean
+  success "Cleanup completed"
+}
+
+print_logo() {
+  echo "
+ ######
+ #     #  ####  ##### ###### # #      ######  ####
+ #     # #    #   #   #      # #      #      #
+ #     # #    #   #   #####  # #      #####   ####
+ #     # #    #   #   #      # #      #           #
+ #     # #    #   #   #      # #      #      #    #
+ ######   ####    #   #      # ###### ######  ####
+
+  "
 }
