@@ -77,8 +77,8 @@ jobs:
           brew list --version
 
           echo "=== ASDF runtimes ==="
-          asdf current nodejs
-          asdf current ruby
+          node --version
+          ruby --version
 
           echo "=== Oh My Zsh ==="
           test -d ~/.oh-my-zsh && echo "  Oh My Zsh installed"
