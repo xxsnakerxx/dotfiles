@@ -66,6 +66,17 @@ sudo_keepalive() {
 }
 
 stow_files() {
+
+  info "Removing existing dotfiles that would conflict with stow..."
+  ignore_list=""
+  [ -f .stow-local-ignore ] && ignore_list=$(grep -v '^#' .stow-local-ignore | grep -v '^[[:space:]]*$' || true)
+  for name in * .[!.]* ..?*; do
+    [ -e "$name" ] || continue
+    [ "$name" = "." ] || [ "$name" = ".." ] && continue
+    echo "$ignore_list" | grep -qFx "$name" && continue
+    [ -e "$HOME/$name" ] && rm -rf "$HOME/$name"
+  done
+
   info "Stowing files..."
   stow .
   success "Files stowed"
