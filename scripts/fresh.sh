@@ -8,8 +8,9 @@ set -o pipefail
 . scripts/brew.sh
 . scripts/zsh.sh
 . scripts/asdf.sh
+. scripts/macos.sh
 
-info "Starting fresh setup..."
+print_logo
 
 yes_no_input "Are you sure you want to continue?" "exit"
 
@@ -20,6 +21,8 @@ go_home
 install_oh_my_zsh
 install_brew_bundle
 install_asdf_tools
+setup_macos
+clean_up
 
 if yes_no_input "Do you want to update the system?"; then
   update_system
