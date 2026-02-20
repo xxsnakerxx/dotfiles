@@ -49,7 +49,7 @@ jobs:
             brew \"pure\"
             brew \"stow\"
             brew \"mas\"
-          " > ~/.brewfile
+          " > ~/.dotfiles/.brewfile
 
       - name: Run fresh setup
         run: |
