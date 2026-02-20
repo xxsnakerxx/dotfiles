@@ -21,8 +21,8 @@ stow_files
 go_home
 install_oh_my_zsh
 install_brew_bundle
-install_asdf_tools
 reload_zsh
+install_asdf_tools
 
 if yes_no_input "Do you want to setup macOS?"; then
   setup_macos
