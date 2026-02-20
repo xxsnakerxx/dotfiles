@@ -5,6 +5,10 @@ on:
     branches:
       - main
 
+  pull_request:
+    branches:
+      - main
+
   workflow_dispatch:
 
 jobs:
@@ -27,6 +31,9 @@ jobs:
           cp -R "$GITHUB_WORKSPACE" ~/.dotfiles
 
       - name: Run fresh setup
+        env:
+          HOMEBREW_BUNDLE_CASK_SKIP: true
+          HOMEBREW_BUNDLE_MAS_SKIP: true
         run: |
           cd ~/.dotfiles
           ./scripts/fresh.sh
