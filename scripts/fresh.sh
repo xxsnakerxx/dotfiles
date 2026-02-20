@@ -27,11 +27,11 @@ if yes_no_input "Do you want to setup macOS?"; then
   setup_macos
 fi
 
-if [ "$IS_CI" == "false" ] && yes_no_input "Do you want to run cleanup?"; then
+if yes_no_input "Do you want to run cleanup?"; then
   clean_up
 fi
 
-if [ "$IS_CI" == "false" ] && yes_no_input "Do you want to update the system?"; then
+if yes_no_input "Do you want to update the system?"; then
   update_system
 fi
 
