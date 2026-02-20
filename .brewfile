@@ -16,6 +16,7 @@ brew "sqlite"
 brew "stow"
 brew "tree"
 brew "mas"
+brew "pnpm"
 
 cask "android-studio"
 cask "betterdisplay"
