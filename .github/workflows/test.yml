@@ -34,10 +34,21 @@ jobs:
         run: |
           cp -R "$GITHUB_WORKSPACE" ~/.dotfiles
 
+      - name: Generate test brewfile
+        run: |
+          echo "brew \"git\"" >> ~/.brewfile
+          echo "brew \"asdf\"" >> ~/.brewfile
+          echo "brew \"curl\"" >> ~/.brewfile
+          echo "brew \"gh\"" >> ~/.brewfile
+          echo "brew \"git\"" >> ~/.brewfile
+          echo "brew \"git-town\"" >> ~/.brewfile
+          echo "brew \"jq\"" >> ~/.brewfile
+          echo "brew \"mole\"" >> ~/.brewfile
+          echo "brew \"pure\"" >> ~/.brewfile
+          echo "brew \"stow\"" >> ~/.brewfile
+          echo "brew \"mas\"" >> ~/.brewfile
+
       - name: Run fresh setup
-        env:
-          HOMEBREW_BUNDLE_CASK_SKIP: true
-          HOMEBREW_BUNDLE_MAS_SKIP: true
         run: |
           cd ~/.dotfiles
           ./scripts/fresh.sh
