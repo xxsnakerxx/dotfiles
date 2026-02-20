@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 reset_color=$(tput sgr0 2>/dev/null || true)
 IS_CI=${CI:-${IS_CI:-false}}
@@ -90,7 +90,7 @@ clean_up() {
 reload_zsh() {
   info "Reloading Zsh..."
 
-  source ~/.zshrc
+  zsh -i -c "source ~/.zshrc"
 
   success "Zsh reloaded"
 }

@@ -1,14 +1,16 @@
-#!/bin/bash
+#!/bin/sh
 
 set -o errexit
 set -o nounset
 set -o pipefail
 
-. scripts/utils.sh
-. scripts/brew.sh
-. scripts/zsh.sh
-. scripts/asdf.sh
-. scripts/macos.sh
+DOTFILES_ROOT="$(cd "$(dirname "$0")/.." && pwd)"
+
+. "$DOTFILES_ROOT/scripts/utils.sh"
+. "$DOTFILES_ROOT/scripts/brew.sh"
+. "$DOTFILES_ROOT/scripts/zsh.sh"
+. "$DOTFILES_ROOT/scripts/asdf.sh"
+. "$DOTFILES_ROOT/scripts/macos.sh"
 
 print_logo
 
