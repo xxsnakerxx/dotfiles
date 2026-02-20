@@ -87,6 +87,14 @@ clean_up() {
   success "Cleanup completed"
 }
 
+reload_zsh() {
+  info "Reloading Zsh..."
+
+  source ~/.zshrc
+
+  success "Zsh reloaded"
+}
+
 print_logo() {
   echo "
  ######
