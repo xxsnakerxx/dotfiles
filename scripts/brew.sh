@@ -9,5 +9,7 @@ install_brew() {
 }
 
 install_brew_bundle() {
+  info "Installing Homebrew bundle..."
   brew bundle
+  success "Homebrew bundle installed successfully"
 }
