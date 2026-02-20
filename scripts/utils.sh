@@ -66,7 +66,6 @@ sudo_keepalive() {
 }
 
 stow_files() {
-
   info "Removing existing dotfiles that would conflict with stow..."
   ignore_list=""
   [ -f .stow-local-ignore ] && ignore_list=$(grep -v '^#' .stow-local-ignore | grep -v '^[[:space:]]*$' || true)
