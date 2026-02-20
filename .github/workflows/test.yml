@@ -24,11 +24,11 @@ jobs:
 
       - name: Clone repo to home (simulate user setup)
         run: |
-          cp -R "$GITHUB_WORKSPACE" "$HOME/.dotfiles"
+          cp -R "$GITHUB_WORKSPACE" ~/.dotfiles
 
       - name: Run fresh setup
-        working-directory: $HOME/.dotfiles
         run: |
+          cd ~/.dotfiles
           ./scripts/fresh.sh
 
       - name: Source zsh
