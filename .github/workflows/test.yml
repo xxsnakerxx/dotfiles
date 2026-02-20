@@ -36,17 +36,20 @@ jobs:
 
       - name: Generate test brewfile
         run: |
-          echo "brew \"git\"" >> ~/.brewfile
-          echo "brew \"asdf\"" >> ~/.brewfile
-          echo "brew \"curl\"" >> ~/.brewfile
-          echo "brew \"gh\"" >> ~/.brewfile
-          echo "brew \"git\"" >> ~/.brewfile
-          echo "brew \"git-town\"" >> ~/.brewfile
-          echo "brew \"jq\"" >> ~/.brewfile
-          echo "brew \"mole\"" >> ~/.brewfile
-          echo "brew \"pure\"" >> ~/.brewfile
-          echo "brew \"stow\"" >> ~/.brewfile
-          echo "brew \"mas\"" >> ~/.brewfile
+          echo "
+            brew \"xz\"
+            brew \"git\"
+            brew \"asdf\"
+            brew \"curl\"
+            brew \"gh\"
+            brew \"git\"
+            brew \"git-town\"
+            brew \"jq\"
+            brew \"mole\"
+            brew \"pure\"
+            brew \"stow\"
+            brew \"mas\"
+          " > ~/.brewfile
 
       - name: Run fresh setup
         run: |
