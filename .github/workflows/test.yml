@@ -42,9 +42,11 @@ jobs:
             brew \"curl\"
             brew \"git\"
             brew \"git-town\"
-            brew \"jq\"
             brew \"pure\"
             brew \"stow\"
+            brew \"libyaml\"
+            brew \"readline\"
+            brew \"gmp\"
           " > ~/.dotfiles/.brewfile
 
       - name: Run fresh setup
