@@ -62,8 +62,6 @@ jobs:
         run: |
           set -e
 
-          source ~/.zshrc
-
           echo "=== Core tools ==="
           brew --version
           git --version
@@ -71,13 +69,13 @@ jobs:
           asdf --version
 
           echo "=== Stowed dotfiles (symlinks in HOME) ==="
-          test -L ~/.zshrc && test -f ~/.zshrc && echo "  .zshrc OK"
-          test -L ~/.zprofile && test -f ~/.zprofile && echo "  .zprofile OK"
-          test -L ~/.gitconfig && test -f ~/.gitconfig && echo "  .gitconfig OK"
-          test -L ~/.brewfile && test -f ~/.brewfile && echo "  .brewfile OK"
+          test -L ~/.zshrc && test -f ~/.zshrc && echo "✅ .zshrc OK"
+          test -L ~/.zprofile && test -f ~/.zprofile && echo "✅ .zprofile OK"
+          test -L ~/.gitconfig && test -f ~/.gitconfig && echo "✅ .gitconfig OK"
+          test -L ~/.brewfile && test -f ~/.brewfile && echo "✅ .brewfile OK"
 
           echo "=== Homebrew ==="
-          brew bundle check
+          brew bundle check --file="~/.brewfile"
           brew list --version
 
           echo "=== ASDF runtimes ==="
@@ -85,7 +83,7 @@ jobs:
           ruby --version
 
           echo "=== Oh My Zsh ==="
-          test -d ~/.oh-my-zsh && echo "  Oh My Zsh installed"
+          test -d ~/.oh-my-zsh && echo "✅ Oh My Zsh installed"
 
           echo "=== macOS defaults (from setup_macos) ==="
           test "$(defaults read NSGlobalDomain AppleLocale)" = "en_US@currency=EUR"
