@@ -43,7 +43,6 @@ jobs:
             brew \"git\"
             brew \"asdf\"
             brew \"curl\"
-            brew \"git\"
             brew \"git-town\"
             brew \"pure\"
             brew \"stow\"
