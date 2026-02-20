@@ -20,10 +20,6 @@ install_stow
 stow_files
 go_home
 install_oh_my_zsh
-
-info "Print HOME directory: $HOME"
-ls -la "$HOME"
-
 install_brew_bundle
 install_asdf_tools
 

@@ -21,11 +21,13 @@ jobs:
 
       - name: Checkout code
         uses: actions/checkout@v4
-        with:
-          path: ~/.dotfiles
+
+      - name: Clone repo to home (simulate user setup)
+        run: |
+          cp -R "$GITHUB_WORKSPACE" "$HOME/.dotfiles"
 
       - name: Run fresh setup
-        working-directory: ~/.dotfiles
+        working-directory: $HOME/.dotfiles
         run: |
           ./scripts/fresh.sh
 
