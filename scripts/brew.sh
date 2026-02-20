@@ -22,9 +22,9 @@ install_brew_bundle() {
   info "Installing Homebrew bundle..."
 
   if [ "$IS_CI" == "true" ]; then
-    brew bundle install --brews --taps
+    brew bundle install --brews --taps --file="~/.brewfile"
   else
-    brew bundle install
+    brew bundle install --file="~/.brewfile"
   fi
   success "Homebrew bundle installed successfully"
 }
