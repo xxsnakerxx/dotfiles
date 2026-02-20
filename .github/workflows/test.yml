@@ -37,18 +37,14 @@ jobs:
       - name: Generate test brewfile
         run: |
           echo "
-            brew \"xz\"
             brew \"git\"
             brew \"asdf\"
             brew \"curl\"
-            brew \"gh\"
             brew \"git\"
             brew \"git-town\"
             brew \"jq\"
-            brew \"mole\"
             brew \"pure\"
             brew \"stow\"
-            brew \"mas\"
           " > ~/.dotfiles/.brewfile
 
       - name: Run fresh setup
