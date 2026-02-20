@@ -79,6 +79,7 @@ jobs:
           brew list --version
 
           echo "=== ASDF runtimes ==="
+          export PATH="$HOME/.asdf/shims:$PATH"
           node --version
           ruby --version
 
