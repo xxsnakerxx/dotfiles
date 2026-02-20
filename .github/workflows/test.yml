@@ -1,0 +1,67 @@
+name: Test
+
+on:
+  push:
+    branches:
+      - main
+
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: macos-26
+
+    steps:
+      - name: Clean up installed software
+        run: |
+          brew uninstall --ignore-dependencies --force $(brew list --formula)
+          brew uninstall --cask --force $(brew list --cask)
+          brew cleanup --prune-prefix
+          /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/uninstall.sh)"
+
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Clone repo to home (simulate user setup)
+        run: |
+          cp -R "$GITHUB_WORKSPACE" ~/.dotfiles
+
+      - name: Run fresh setup
+        run: |
+          cd ~/.dotfiles
+          ./scripts/fresh.sh
+
+      - name: Source zsh
+        run: |
+          source ~/.zshrc
+
+      - name: Check if fresh setup completed successfully
+        run: |
+          set -e
+
+          echo "=== Core tools ==="
+          brew --version
+          git --version
+          stow --version
+          asdf --version
+
+          echo "=== Stowed dotfiles (symlinks in HOME) ==="
+          test -L ~/.zshrc && test -f ~/.zshrc && echo "  .zshrc OK"
+          test -L ~/.gitconfig && test -f ~/.gitconfig && echo "  .gitconfig OK"
+
+          echo "=== Homebrew ==="
+          brew bundle check
+          brew list --version
+
+          echo "=== ASDF runtimes ==="
+          asdf current nodejs
+          asdf current ruby
+
+          echo "=== Oh My Zsh ==="
+          test -d ~/.oh-my-zsh && echo "  Oh My Zsh installed"
+
+          echo "=== macOS defaults (from setup_macos) ==="
+          test "$(defaults read NSGlobalDomain AppleLocale)" = "en_US@currency=EUR"
+          test "$(defaults read NSGlobalDomain AppleMeasurementUnits)" = "Centimeters"
+
+          echo "✅ Fresh setup verification passed"

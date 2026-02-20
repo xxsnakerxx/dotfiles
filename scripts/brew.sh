@@ -20,6 +20,11 @@ install_stow() {
 
 install_brew_bundle() {
   info "Installing Homebrew bundle..."
-  brew bundle install --file="~/.brewfile"
+
+  if [ "$IS_CI" == "true" ]; then
+    brew bundle install --brews --taps --file="~/.brewfile"
+  else
+    brew bundle install --file="~/.brewfile"
+  fi
   success "Homebrew bundle installed successfully"
 }

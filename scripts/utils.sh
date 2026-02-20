@@ -1,6 +1,7 @@
 #!/bin/bash
 
 reset_color=$(tput sgr0 2>/dev/null || true)
+IS_CI=${CI:-${IS_CI:-false}}
 
 info() {
   printf "%s💡 %s%s\n" "$(tput setaf 4 2>/dev/null || echo '')" "$1" "$reset_color"
@@ -20,6 +21,10 @@ warn() {
 }
 
 yes_no_input() {
+  if [ "$IS_CI" == "true" ]; then
+    return 0
+  fi
+
   read -p "$1 (y/n): " answer
   if [ "$answer" != "y" ]; then
     if [ "${2:-}" == "exit" ]; then
