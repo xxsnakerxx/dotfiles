@@ -21,8 +21,14 @@ go_home
 install_oh_my_zsh
 install_brew_bundle
 install_asdf_tools
-setup_macos
-clean_up
+
+if yes_no_input "Do you want to setup macOS?"; then
+  setup_macos
+fi
+
+if yes_no_input "Do you want to run cleanup?"; then
+  clean_up
+fi
 
 if yes_no_input "Do you want to update the system?"; then
   update_system
