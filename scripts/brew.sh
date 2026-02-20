@@ -20,6 +20,6 @@ install_stow() {
 
 install_brew_bundle() {
   info "Installing Homebrew bundle..."
-  brew bundle
+  brew bundle install --file="~/.brewfile"
   success "Homebrew bundle installed successfully"
 }
