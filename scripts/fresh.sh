@@ -16,6 +16,7 @@ yes_no_input "Are you sure you want to continue?" "exit"
 
 install_xcode_clt
 install_brew
+install_stow
 stow_files
 go_home
 install_oh_my_zsh

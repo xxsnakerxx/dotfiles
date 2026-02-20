@@ -8,6 +8,16 @@ install_brew() {
   fi
 }
 
+install_stow() {
+  if ! command -v stow >/dev/null 2>&1; then
+    info "Installing Stow..."
+    brew install stow
+    success "Stow installed successfully"
+  else
+    warn "Stow already installed"
+  fi
+}
+
 install_brew_bundle() {
   info "Installing Homebrew bundle..."
   brew bundle
