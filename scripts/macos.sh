@@ -55,6 +55,13 @@ setup_localization() {
   sudo defaults write /Library/Preferences/com.apple.timezone.auto Active -bool YES
   sudo systemsetup -setusingnetworktime on
 
+  # Use 24-hour time format in menu bar (day of week, no date)
+  defaults write com.apple.menuextra.clock Show24Hour -bool true
+  defaults write com.apple.menuextra.clock ShowAMPM -bool false
+  defaults write com.apple.menuextra.clock ShowDate -int 0
+  defaults write com.apple.menuextra.clock ShowDayOfWeek -bool true
+  kill -SIGHUP SystemUIServer 2>/dev/null || true
+
   success "Localization setup completed"
 }
 
@@ -127,7 +134,7 @@ setup_keyboard() {
   defaults write NSGlobalDomain ApplePressAndHoldEnabled -bool false
 
   # Set a blazingly fast keyboard repeat rate
-  defaults write NSGlobalDomain KeyRepeat -int 1
+  defaults write NSGlobalDomain KeyRepeat -int 2
   defaults write NSGlobalDomain InitialKeyRepeat -int 15
 
   # Automatically illuminate built-in MacBook keyboard in low light
