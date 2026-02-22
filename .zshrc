@@ -52,6 +52,6 @@ export PATH="${ASDF_DATA_DIR:-$HOME/.asdf}/shims:$PATH"
 # go
 export PATH=$PATH:$(go env GOPATH)/bin
 
-if [ -f .zshrc.local.sh ]; then
-    source .zshrc.local.sh
+if [ -f ~/.zshrc.local.sh ]; then
+    source ~/.zshrc.local.sh
 fi
