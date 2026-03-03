@@ -52,3 +52,4 @@ cask "zoom"
 cask "zulu@17"
 
 mas "Xcode", id: 497799835
+mas "Flow: Focus & Pomodoro Timer", id: 1423210932
