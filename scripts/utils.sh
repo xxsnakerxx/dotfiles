@@ -65,6 +65,12 @@ sudo_keepalive() {
   done 2>/dev/null &
 }
 
+fix_permissions() {
+  info "Fixing user home directory permissions..."
+  chmod 700 ~
+  success "User home directory permissions fixed"
+}
+
 stow_files() {
   info "Removing existing dotfiles that would conflict with stow..."
   ignore_list=""
