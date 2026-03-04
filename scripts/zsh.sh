@@ -26,9 +26,9 @@ clone_zsh_plugin() {
   local url="$1"
   local name="$2"
 
-  if [[ ! -d "${ZSH_CUSTOM}/${name}" ]]; then
+  if [[ ! -d "${ZSH_CUSTOM}/plugins/${name}" ]]; then
     info "Cloning ${name} plugin..."
-    git clone "${url}" "${ZSH_CUSTOM}/${name}"
+    git clone "${url}" "${ZSH_CUSTOM}/plugins/${name}"
     success "${name} plugin cloned"
   else
     warn "${name} plugin already cloned"
