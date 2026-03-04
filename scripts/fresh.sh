@@ -11,8 +11,11 @@ DOTFILES_ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 . "$DOTFILES_ROOT/scripts/zsh.sh"
 . "$DOTFILES_ROOT/scripts/asdf.sh"
 . "$DOTFILES_ROOT/scripts/macos.sh"
+. "$DOTFILES_ROOT/scripts/cursor.sh"
 
 print_logo
+
+link_cursor_settings
 
 yes_no_input "Are you sure you want to continue?" "exit"
 
@@ -23,6 +26,7 @@ install_stow
 stow_files
 go_home
 fix_permissions
+link_cursor_settings
 install_oh_my_zsh
 install_brew_bundle
 reload_zsh
