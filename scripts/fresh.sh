@@ -15,8 +15,6 @@ DOTFILES_ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 
 print_logo
 
-link_cursor_settings
-
 yes_no_input "Are you sure you want to continue?" "exit"
 
 install_xcode_clt
@@ -31,6 +29,7 @@ install_oh_my_zsh
 install_brew_bundle
 reload_zsh
 install_asdf_tools
+link_cursor_settings
 
 if yes_no_input "Do you want to setup macOS?"; then
   setup_macos
