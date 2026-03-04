@@ -65,6 +65,29 @@ sudo_keepalive() {
   done 2>/dev/null &
 }
 
+setup_touch_id_for_sudo() {
+  info "Setting up Touch ID for sudo..."
+
+  if [[ ! -f /usr/lib/pam/pam_tid.so && ! -f /usr/lib/pam/pam_tid.so.2 ]]; then
+    warn "Touch ID not available on this machine; skipping Touch ID for sudo setup"
+    return 0
+  fi
+
+  local template="/etc/pam.d/sudo_local.template"
+  local sudo_local="/etc/pam.d/sudo_local"
+
+  if [[ -f "$sudo_local" ]]; then
+    warn "sudo_local already exists; skipping Touch ID for sudo setup"
+    return 0
+  fi
+
+  sudo cp "$template" "$sudo_local"
+  # Uncomment Touch ID line and fix pam_tid.s -> pam_tid.so if present
+  sudo sed -i '' -e '/pam_tid/s/^# *//' -e 's/pam_tid\.s$/pam_tid.so/' "$sudo_local"
+
+  success "Touch ID for sudo setup completed"
+}
+
 fix_permissions() {
   info "Fixing user home directory permissions..."
   chmod 700 ~

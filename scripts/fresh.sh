@@ -17,6 +17,7 @@ print_logo
 yes_no_input "Are you sure you want to continue?" "exit"
 
 install_xcode_clt
+setup_touch_id_for_sudo
 install_brew
 install_stow
 stow_files
