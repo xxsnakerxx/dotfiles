@@ -24,7 +24,6 @@ install_stow
 stow_files
 go_home
 fix_permissions
-link_cursor_settings
 install_oh_my_zsh
 install_brew_bundle
 reload_zsh
