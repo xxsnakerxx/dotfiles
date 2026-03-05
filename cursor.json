@@ -18,7 +18,7 @@
   "editor.minimap.enabled": true,
   "editor.linkedEditing": true,
   "editor.codeActionsOnSave": {
-      "source.fixAll": "explicit",
+      "source.fixAll": "explicit"
   },
   "editor.acceptSuggestionOnEnter": "smart",
 
@@ -56,6 +56,8 @@
 
   "scm.defaultViewMode": "tree",
 
+  "svelte.enable-ts-plugin": true,
+
   "terminal.external.osxExec": "iTerm.app",
   "terminal.integrated.fontSize": 14,
   "terminal.integrated.enableMultiLinePasteWarning": "never",
@@ -81,5 +83,5 @@
 
   "[jsonc]": {
       "editor.defaultFormatter": "esbenp.prettier-vscode"
-  },
+  }
 }
