@@ -15,7 +15,7 @@ link_cursor_settings() {
 
   mv "$cursor_settings_file" "$cursor_settings_file.backup"
 
-  ln -s "$DOTFILES_ROOT/.cursor_settings.json" "$cursor_settings_file"
+  ln -s "$DOTFILES_ROOT/cursor.json" "$cursor_settings_file"
 
   success "Cursor settings linked successfully"
 }
