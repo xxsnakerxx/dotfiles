@@ -23,30 +23,30 @@ brew "readline"
 brew "gmp"
 brew "yarn"
 
-cask "android-studio"
-cask "cursor"
-cask "dictionaries"
-cask "firefox"
-cask "font-cascadia-code"
-cask "google-chrome"
-cask "google-drive"
-cask "handbrake-app"
-cask "iina"
-cask "iterm2"
-cask "libreoffice"
-cask "minisim"
-cask "mongodb-compass"
-cask "numi"
-cask "orbstack"
-cask "rekordbox"
-cask "slack"
-cask "syntax-highlight"
-cask "telegram-desktop"
-cask "the-unarchiver"
-cask "transmission"
-cask "whatsapp"
-cask "zoom"
-cask "zulu@17"
+cask "android-studio", greedy: true
+cask "cursor", greedy: true
+cask "dictionaries", greedy: true
+cask "firefox", greedy: true
+cask "font-cascadia-code", greedy: true
+cask "google-chrome", greedy: true
+cask "google-drive", greedy: true
+cask "handbrake-app", greedy: true
+cask "iina", greedy: true
+cask "iterm2", greedy: true
+cask "libreoffice", greedy: true
+cask "minisim", greedy: true
+cask "mongodb-compass", greedy: true
+cask "numi", greedy: true
+cask "orbstack", greedy: true
+cask "rekordbox", greedy: true
+cask "slack", greedy: true
+cask "syntax-highlight", greedy: true
+cask "telegram-desktop", greedy: true
+cask "the-unarchiver", greedy: true
+cask "transmission", greedy: true
+cask "whatsapp", greedy: true
+cask "zoom", greedy: true
+cask "zulu@17", greedy: true
 
 mas "Xcode", id: 497799835
 mas "Flow: Focus & Pomodoro Timer", id: 1423210932
