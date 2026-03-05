@@ -21,6 +21,7 @@ brew "pnpm"
 brew "libyaml"
 brew "readline"
 brew "gmp"
+brew "yarn"
 
 cask "android-studio"
 cask "cursor"
