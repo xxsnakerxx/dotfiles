@@ -31,7 +31,7 @@
   "explorer.openEditors.minVisible": 0,
   "explorer.confirmDragAndDrop": false,
 
-  "extensions.autoUpdate": false,
+  "extensions.autoUpdate": true,
   "extensions.ignoreRecommendations": true,
 
   "files.trimTrailingWhitespace": true,
