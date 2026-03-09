@@ -81,6 +81,8 @@
   },
   "workbench.layoutControl.enabled": false,
 
+  "update.mode": "none",
+
   "[jsonc]": {
       "editor.defaultFormatter": "esbenp.prettier-vscode"
   }
