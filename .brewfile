@@ -48,6 +48,7 @@ cask "whatsapp", greedy: true
 cask "zoom", greedy: true
 cask "zulu@17", greedy: true
 cask "obs", greedy: true
+cask "qlmarkdown", greedy: true
 
 mas "Xcode", id: 497799835
 mas "Flow: Focus & Pomodoro Timer", id: 1423210932
