@@ -36,6 +36,7 @@
 
 [alias]
   prune-local = "!git fetch -p && git branch -vv | grep ': gone]' | awk '{print $1}' | xargs git branch -D"
+  branch-name = "!git branch --show-current"
 	append = town append
 	diff-parent = town diff-parent
 	hack = town hack
