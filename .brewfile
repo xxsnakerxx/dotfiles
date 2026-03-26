@@ -51,6 +51,7 @@ cask "qlmarkdown", greedy: true
 
 mas "Xcode", id: 497799835
 mas "Flow: Focus & Pomodoro Timer", id: 1423210932
+mas "Image2WebP - Image Converter", id: 6670599252
 
 vscode "esbenp.prettier-vscode"
 vscode "dbaeumer.vscode-eslint"
