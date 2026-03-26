@@ -20,7 +20,6 @@
   "editor.codeActionsOnSave": {
       "source.fixAll": "explicit"
   },
-  "editor.acceptSuggestionOnEnter": "smart",
 
   "emmet.includeLanguages": {
       "javascript": "javascriptreact",
