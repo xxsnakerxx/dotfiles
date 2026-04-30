@@ -52,6 +52,11 @@ export PATH="${ASDF_DATA_DIR:-$HOME/.asdf}/shims:$PATH"
 # go
 export PATH=$PATH:$(go env GOPATH)/bin
 
+# curl
+export PATH="/opt/homebrew/opt/curl/bin:$PATH"
+export LDFLAGS="-L/opt/homebrew/opt/curl/lib"
+export CPPFLAGS="-I/opt/homebrew/opt/curl/include"
+
 if [ -f ~/.zshrc.local.sh ]; then
     source ~/.zshrc.local.sh
 fi
