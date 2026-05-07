@@ -4,6 +4,8 @@
 
   "breadcrumbs.enabled": true,
 
+  "cursor.cpp.disabledLanguages": [],
+
   "debug.console.fontSize": 14,
 
   "diffEditor.ignoreTrimWhitespace": false,
