@@ -4,7 +4,10 @@
 
   "breadcrumbs.enabled": true,
 
+  "color-highlight.markerType": "dot-before",
+
   "cursor.cpp.disabledLanguages": [],
+  "cursor.composer.editorConversationDensity": "compact-ungrouped",
 
   "debug.console.fontSize": 14,
 
@@ -84,5 +87,6 @@
 
   "[jsonc]": {
       "editor.defaultFormatter": "esbenp.prettier-vscode"
-  }
+},
+"claudeCode.preferredLocation": "sidebar"
 }
