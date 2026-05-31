@@ -1,24 +1,18 @@
-#!/bin/sh
+#!/bin/bash
 
+_color_blue=$(tput setaf 4 2>/dev/null || true)
+_color_green=$(tput setaf 2 2>/dev/null || true)
+_color_red=$(tput setaf 1 2>/dev/null || true)
+_color_yellow=$(tput setaf 3 2>/dev/null || true)
 reset_color=$(tput sgr0 2>/dev/null || true)
 IS_CI=${CI:-${IS_CI:-false}}
 
-info() {
-  printf "%s💡 %s%s\n" "$(tput setaf 4 2>/dev/null || echo '')" "$1" "$reset_color"
-}
+_print() { printf "%s%s %s%s\n" "$1" "$2" "$3" "$reset_color"; }
 
-success() {
-  printf "%s✅ %s%s\n" "$(tput setaf 2 2>/dev/null || echo '')" "$1" "$reset_color"
-  printf "\n"
-}
-
-err() {
-  printf "%s❌ %s%s\n" "$(tput setaf 1 2>/dev/null || echo '')" "$1" "$reset_color"
-}
-
-warn() {
-  printf "%s⚠️ %s%s\n" "$(tput setaf 3 2>/dev/null || echo '')" "$1" "$reset_color"
-}
+info()    { _print "$_color_blue"   "💡" "$1"; }
+success() { _print "$_color_green"  "✅" "$1"; printf "\n"; }
+err()     { _print "$_color_red"    "❌" "$1"; }
+warn()    { _print "$_color_yellow" "⚠️" "$1"; }
 
 yes_no_input() {
   if [ "$IS_CI" == "true" ]; then
@@ -68,7 +62,7 @@ sudo_keepalive() {
 setup_touch_id_for_sudo() {
   info "Setting up Touch ID for sudo..."
 
-  if [[ ! -f /usr/lib/pam/pam_tid.so && ! -f /usr/lib/pam/pam_tid.so.2 ]]; then
+  if ! ls /usr/lib/pam/pam_tid.so* >/dev/null 2>&1; then
     warn "Touch ID not available on this machine; skipping Touch ID for sudo setup"
     return 0
   fi
@@ -96,8 +90,7 @@ fix_permissions() {
 
 stow_files() {
   info "Removing existing dotfiles that would conflict with stow..."
-  ignore_list=""
-  [ -f .stow-local-ignore ] && ignore_list=$(grep -v '^#' .stow-local-ignore | grep -v '^[[:space:]]*$' || true)
+  ignore_list=$(grep -v '^#' .stow-local-ignore 2>/dev/null | grep -v '^[[:space:]]*$' || true)
   for name in * .[!.]* ..?*; do
     [ -e "$name" ] || continue
     [ "$name" = "." ] || [ "$name" = ".." ] && continue
