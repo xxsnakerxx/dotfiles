@@ -47,6 +47,7 @@ cask "zoom", greedy: true
 cask "zulu@17", greedy: true
 cask "obs", greedy: true
 cask "qlmarkdown", greedy: true
+cask "claude-code", greedy: true
 
 mas "Xcode", id: 497799835
 mas "Flow: Focus & Pomodoro Timer", id: 1423210932
@@ -65,3 +66,4 @@ vscode "svelte.svelte-vscode"
 vscode "GitLab.gitlab-workflow"
 vscode "naumovs.color-highlight"
 vscode "anthropic.claude-code"
+vscode "vunguyentuan.vscode-css-variables"
