@@ -5,7 +5,6 @@ brew "curl"
 brew "ffmpeg"
 brew "fswatch"
 brew "gh"
-brew "git"
 brew "git-town"
 brew "go"
 brew "imagemagick"
@@ -20,11 +19,13 @@ brew "stow"
 brew "tree"
 brew "mas"
 brew "libyaml"
-brew "readline"
 brew "gmp"
+brew "ollama"
+brew "anomalyco/tap/opencode"
+brew "llama.cpp"
 
 cask "android-studio", greedy: true
-cask "cursor", greedy: true
+cask "visual-studio-code", greedy: true
 cask "dictionaries", greedy: true
 cask "firefox", greedy: true
 cask "font-cascadia-code", greedy: true
@@ -50,6 +51,7 @@ cask "zulu@17", greedy: true
 cask "obs", greedy: true
 cask "qlmarkdown", greedy: true
 cask "claude-code", greedy: true
+cask "llama-app", greedy: true
 
 mas "Xcode", id: 497799835
 mas "Flow: Focus & Pomodoro Timer", id: 1423210932
@@ -60,12 +62,15 @@ vscode "dbaeumer.vscode-eslint"
 vscode "biomejs.biome"
 vscode "file-icons.file-icons"
 vscode "wayou.vscode-todo-highlight"
-vscode "christian-kohler.npm-intellisense"
-vscode "IBM.output-colorizer"
 vscode "streetsidesoftware.code-spell-checker"
 vscode "zhuangtongfa.material-theme"
 vscode "svelte.svelte-vscode"
-vscode "GitLab.gitlab-workflow"
-vscode "naumovs.color-highlight"
+vscode "gitlab.gitlab-workflow"
 vscode "anthropic.claude-code"
 vscode "vunguyentuan.vscode-css-variables"
+vscode "github.vscode-pull-request-github"
+vscode "kisstkondoros.vscode-gutter-preview"
+vscode "redhat.vscode-yaml"
+vscode "ms-vscode.live-server"
+vscode "yatki.vscode-surround"
+vscode "ggml-org.llama-vscode"

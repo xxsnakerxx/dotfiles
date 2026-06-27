@@ -11,7 +11,6 @@ DOTFILES_ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 . "$DOTFILES_ROOT/scripts/zsh.sh"
 . "$DOTFILES_ROOT/scripts/asdf.sh"
 . "$DOTFILES_ROOT/scripts/macos.sh"
-. "$DOTFILES_ROOT/scripts/cursor.sh"
 
 print_logo
 
@@ -28,8 +27,6 @@ install_oh_my_zsh
 install_brew_bundle
 reload_zsh
 install_asdf_tools
-link_cursor_settings
-link_cursor_mcp
 
 if yes_no_input "Do you want to setup macOS?"; then
   setup_macos
