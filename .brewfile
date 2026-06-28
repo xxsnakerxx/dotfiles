@@ -20,7 +20,6 @@ brew "tree"
 brew "mas"
 brew "libyaml"
 brew "gmp"
-brew "ollama"
 brew "anomalyco/tap/opencode"
 brew "llama.cpp"
 
