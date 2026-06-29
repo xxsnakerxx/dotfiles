@@ -1,30 +1,29 @@
-brew "xz"
-brew "git"
+brew "anomalyco/tap/opencode"
 brew "asdf"
 brew "curl"
 brew "ffmpeg"
 brew "fswatch"
 brew "gh"
+brew "git"
 brew "git-town"
+brew "gmp"
 brew "go"
 brew "imagemagick"
-brew "pngquant"
-brew "oxipng"
 brew "jq"
+brew "libyaml"
+brew "mas"
 brew "mole"
+brew "oxipng"
+brew "pngquant"
 brew "pure"
 brew "readline"
 brew "sqlite"
 brew "stow"
 brew "tree"
-brew "mas"
-brew "libyaml"
-brew "gmp"
-brew "anomalyco/tap/opencode"
-brew "llama.cpp"
+brew "xz"
 
 cask "android-studio", greedy: true
-cask "visual-studio-code", greedy: true
+cask "claude-code", greedy: true
 cask "dictionaries", greedy: true
 cask "firefox", greedy: true
 cask "font-cascadia-code", greedy: true
@@ -37,39 +36,38 @@ cask "libreoffice", greedy: true
 cask "minisim", greedy: true
 cask "mongodb-compass", greedy: true
 cask "numi", greedy: true
+cask "obs", greedy: true
 cask "orbstack", greedy: true
+cask "qlmarkdown", greedy: true
 cask "rekordbox", greedy: true
 cask "slack", greedy: true
 cask "syntax-highlight", greedy: true
 cask "telegram-desktop", greedy: true
 cask "the-unarchiver", greedy: true
 cask "transmission", greedy: true
+cask "visual-studio-code", greedy: true
 cask "whatsapp", greedy: true
 cask "zoom", greedy: true
 cask "zulu@17", greedy: true
-cask "obs", greedy: true
-cask "qlmarkdown", greedy: true
-cask "claude-code", greedy: true
-cask "llama-app", greedy: true
 
-mas "Xcode", id: 497799835
 mas "Flow: Focus & Pomodoro Timer", id: 1423210932
 mas "Image2WebP - Image Converter", id: 6670599252
+mas "Xcode", id: 497799835
 
-vscode "esbenp.prettier-vscode"
-vscode "dbaeumer.vscode-eslint"
-vscode "biomejs.biome"
-vscode "file-icons.file-icons"
-vscode "wayou.vscode-todo-highlight"
-vscode "streetsidesoftware.code-spell-checker"
-vscode "zhuangtongfa.material-theme"
-vscode "svelte.svelte-vscode"
-vscode "gitlab.gitlab-workflow"
 vscode "anthropic.claude-code"
-vscode "vunguyentuan.vscode-css-variables"
+vscode "biomejs.biome"
+vscode "dbaeumer.vscode-eslint"
+vscode "esbenp.prettier-vscode"
+vscode "file-icons.file-icons"
 vscode "github.vscode-pull-request-github"
+vscode "gitlab.gitlab-workflow"
 vscode "kisstkondoros.vscode-gutter-preview"
-vscode "redhat.vscode-yaml"
 vscode "ms-vscode.live-server"
+vscode "redhat.vscode-yaml"
+vscode "streetsidesoftware.code-spell-checker"
+vscode "svelte.svelte-vscode"
+vscode "vunguyentuan.vscode-css-variables"
+vscode "wayou.vscode-todo-highlight"
+vscode "supermaven.supermaven"
 vscode "yatki.vscode-surround"
-vscode "ggml-org.llama-vscode"
+vscode "zhuangtongfa.material-theme"
