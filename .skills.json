@@ -1,0 +1,31 @@
+{
+  "agents": ["*"],
+  "sources": [
+    {
+      "package": "mattpocock/skills",
+      "skills": [
+        "ask-matt", "codebase-design", "diagnosing-bugs",
+        "domain-modeling", "grill-me", "grill-with-docs",
+        "grilling", "handoff", "improve-codebase-architecture",
+        "prototype", "setup-matt-pocock-skills", "tdd", "teach",
+        "to-issues", "to-prd", "triage", "writing-great-skills"
+      ]
+    },
+    {
+      "package": "vercel-labs/skills",
+      "skills": ["find-skills"]
+    },
+    {
+      "package": "vercel-labs/agent-skills",
+      "skills": ["vercel-react-best-practices"]
+    },
+    {
+      "package": "sveltejs/ai-tools",
+      "skills": ["svelte-code-writer", "svelte-core-bestpractices"]
+    },
+    {
+      "package": "juliusbrussee/caveman",
+      "skills": ["caveman"]
+    }
+  ]
+}
