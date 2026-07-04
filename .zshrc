@@ -32,6 +32,7 @@ export PATH="$HOME/.docker/bin:$PATH"
 
 alias zsh_config="code ~/.zshrc"
 alias zsh_reload="source ~/.zshrc"
+alias dotup="bash ~/.dotfiles/scripts/update.sh"
 
 export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
