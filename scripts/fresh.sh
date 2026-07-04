@@ -10,6 +10,7 @@ DOTFILES_ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 . "$DOTFILES_ROOT/scripts/brew.sh"
 . "$DOTFILES_ROOT/scripts/zsh.sh"
 . "$DOTFILES_ROOT/scripts/asdf.sh"
+. "$DOTFILES_ROOT/scripts/skills.sh"
 . "$DOTFILES_ROOT/scripts/macos.sh"
 
 print_logo
@@ -25,6 +26,7 @@ go_home
 fix_permissions
 install_oh_my_zsh
 install_brew_bundle
+install_skills
 reload_zsh
 install_asdf_tools
 
