@@ -14,7 +14,7 @@ _info "Brew upgrade..."
 brew upgrade --greedy
 
 _info "Brew bundle..."
-brew bundle --file="$DOTFILES_ROOT/.brewfile"
+brew bundle --file="$DOTFILES_ROOT/.brewfile --verbose"
 
 _info "Skills update..."
 npx skills update -g -y
