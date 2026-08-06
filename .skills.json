@@ -4,11 +4,12 @@
     {
       "package": "mattpocock/skills",
       "skills": [
-        "ask-matt", "codebase-design", "diagnosing-bugs",
+        "ask-matt", "code-review", "codebase-design", "diagnosing-bugs",
         "domain-modeling", "grill-me", "grill-with-docs",
-        "grilling", "handoff", "improve-codebase-architecture",
-        "prototype", "setup-matt-pocock-skills", "tdd", "teach",
-        "to-issues", "to-prd", "triage", "writing-great-skills"
+        "grilling", "handoff", "implement", "improve-codebase-architecture",
+        "loop-me", "prototype", "research", "setup-matt-pocock-skills",
+        "tdd", "teach", "to-spec", "to-tickets", "triage",
+        "wait-what", "wayfinder", "wizard"
       ]
     },
     {

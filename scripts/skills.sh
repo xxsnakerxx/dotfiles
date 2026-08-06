@@ -4,14 +4,17 @@ install_skills() {
 
   for row in $(jq -c '.sources[]' "$skills_file"); do
     local package
-    local skill_list
     local agents
+    local skill_flags=()
 
     package=$(echo "$row" | jq -r '.package')
-    skill_list=$(echo "$row" | jq -r '.skills | join(",")')
     agents=$(jq -r '.agents | join(",")' "$skills_file")
 
-    npx skills add "$package" -g --skill "$skill_list" -a "$agents" -y
+    while IFS= read -r skill; do
+      skill_flags+=(-s "$skill")
+    done <<< "$(echo "$row" | jq -r '.skills[]')"
+
+    npx skills add "$package" -g "${skill_flags[@]}" -a "$agents" -y
   done
 
   success "Skills installed"
