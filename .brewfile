@@ -22,6 +22,7 @@ brew "readline"
 brew "sqlite"
 brew "stow"
 brew "tree"
+brew "capcut"
 brew "xz"
 
 cask "android-studio", greedy: true
