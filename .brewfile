@@ -26,7 +26,6 @@ brew "xz"
 
 cask "android-studio", greedy: true
 cask "claude-code", greedy: true
-cask "capcut", greedy: true
 cask "dictionaries", greedy: true
 cask "firefox", greedy: true
 cask "font-cascadia-code", greedy: true
