@@ -3,6 +3,9 @@ set -e
 
 DOTFILES_ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 
+. "$DOTFILES_ROOT/scripts/utils.sh"
+. "$DOTFILES_ROOT/scripts/skills.sh"
+
 _dim=$(tput dim 2>/dev/null || true)
 _yellow=$(tput setaf 3 2>/dev/null || true)
 _green=$(tput setaf 2 2>/dev/null || true)
@@ -15,6 +18,9 @@ brew upgrade --greedy
 
 _info "Brew bundle..."
 brew bundle --verbose
+
+_info "Skills sync..."
+sync_skills
 
 _info "Skills update..."
 npx skills update -g -y
