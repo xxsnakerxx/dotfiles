@@ -19,10 +19,10 @@ brew upgrade --greedy
 _info "Brew bundle..."
 brew bundle --verbose
 
-_info "Skills sync..."
+_info "Skills sync (install missing from .skills.json)..."
 sync_skills
 
-_info "Skills update..."
+_info "Skills update (pull latest versions)..."
 npx skills update -g -y
 
 _info "npm global update..."
