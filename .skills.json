@@ -26,8 +26,8 @@
       "skills": ["svelte-code-writer", "svelte-core-bestpractices"]
     },
     {
-      "package": "juliusbrussee/caveman",
-      "skills": ["caveman"]
+      "package": "googlechrome/modern-web-guidance",
+      "skills": ["modern-web-guidance"]
     }
   ]
 }
