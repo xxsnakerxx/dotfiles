@@ -29,7 +29,7 @@ jobs:
           /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/uninstall.sh)"
 
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Clone repo to home (simulate user setup)
         shell: zsh {0}
@@ -85,6 +85,11 @@ jobs:
 
           echo "=== Oh My Zsh ==="
           test -d ~/.oh-my-zsh && echo "✅ Oh My Zsh installed"
+
+          echo "=== Skills ==="
+          test -d ~/.agents/skills && echo "✅ skills dir OK"
+          test -f ~/.agents/skills/create-pr/SKILL.md && echo "✅ create-pr skill installed"
+          test -f ~/.agents/skills/review-fixes/SKILL.md && echo "✅ review-fixes skill installed"
 
           echo "=== macOS defaults (from setup_macos) ==="
           test "$(defaults read NSGlobalDomain AppleLocale)" = "en_US@currency=EUR" && echo "✅ AppleLocale OK"
