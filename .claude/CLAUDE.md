@@ -9,6 +9,10 @@ Applies to every project. Project-specific rules live in the project's own CLAUD
 - If a fix must ship before the answer arrives: implement the conservative branch, say plainly "не проверено — предположил X", and list it as a manual check. Never write an unverified claim into a code comment
 - If the same question has been re-examined more than twice without a clear answer, stop and ask — with a short summary of the tradeoff and a recommendation, not an exhaustive survey
 
+## Existing solutions first
+
+- Before deciding to implement something — a helper, a script, a library, a CI step — search the web for an existing ready-made solution (a package, a GitHub Action, a service) and propose it. Hand-rolling what already exists is the most common avoidable work. Build only when nothing fits or a dependency is explicitly unwanted.
+
 ## Verification
 
 - The user walks the UI himself to verify visual changes. Never claim a visual change is verified, and never substitute a screenshot pass for it
