@@ -95,7 +95,7 @@ stow_files() {
     [ -e "$name" ] || continue
     [ "$name" = "." ] || [ "$name" = ".." ] && continue
     echo "$ignore_list" | grep -qFx "$name" && continue
-    [ -e "$HOME/$name" ] && rm -rf "$HOME/$name"
+    [ -e "$HOME/$name" ] && [ ! -d "$HOME/$name" ] && rm -rf "$HOME/$name"
   done
 
   info "Stowing files..."
