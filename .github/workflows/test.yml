@@ -91,6 +91,10 @@ jobs:
           test -f ~/.agents/skills/create-pr/SKILL.md && echo "✅ create-pr skill installed"
           test -f ~/.agents/skills/review-fixes/SKILL.md && echo "✅ review-fixes skill installed"
 
+          echo "=== Rules (AGENTS.md canonical, CLAUDE.md symlink) ==="
+          test -L ~/.claude/CLAUDE.md && echo "✅ CLAUDE.md is a symlink"
+          diff -q ~/.claude/CLAUDE.md ~/.config/opencode/AGENTS.md && echo "✅ CLAUDE.md == AGENTS.md"
+
           echo "=== macOS defaults (from setup_macos) ==="
           test "$(defaults read NSGlobalDomain AppleLocale)" = "en_US@currency=EUR" && echo "✅ AppleLocale OK"
           test "$(defaults read NSGlobalDomain AppleMeasurementUnits)" = "Centimeters" && echo "✅ AppleMeasurementUnits OK"

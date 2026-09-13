@@ -6,7 +6,7 @@ Applies to every project. Project-specific rules live in the project's own AGENT
 
 - Read the official docs before using any library API — never write API shapes from memory
 - Never present an assumption as fact. If the codebase can't prove it — API response shapes, which fields arrive on which status, backend behaviour — ask before writing code or comments that depend on it
-- If a fix must ship before the answer arrives: implement the conservative branch, say plainly "не проверено — предположил X", and list it as a manual check. Never write an unverified claim into a code comment
+- If a fix must ship before the answer arrives: implement the conservative branch, say plainly "unverified — assumed X", and list it as a manual check. Never write an unverified claim into a code comment
 - If the same question has been re-examined more than twice without a clear answer, stop and ask — with a short summary of the tradeoff and a recommendation, not an exhaustive survey
 
 ## Existing solutions first
@@ -23,7 +23,7 @@ Applies to every project. Project-specific rules live in the project's own AGENT
 
 - If a command is denied by the sandbox or needs something unavailable (docker daemon, a login, a network host), don't silently downgrade to reasoning or drop the check. Hand the user a copy-pasteable `! <command>` and ask for the output
 - Say what the expected output looks like, so a wrong result is recognisable without reading the code
-- Until that output arrives, the thing stays "не проверено" — never report it as verified
+- Until that output arrives, the thing stays "unverified" — never report it as verified
 
 ## Respecting edits
 
