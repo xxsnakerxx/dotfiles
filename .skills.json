@@ -32,6 +32,10 @@
     {
       "package": "xxsnakerxx/skills",
       "skills": ["create-pr", "review-fixes"]
+    },
+    {
+      "package": "dietrichgebert/ponytail",
+      "skills": ["ponytail"]
     }
   ]
 }
