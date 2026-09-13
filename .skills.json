@@ -28,6 +28,10 @@
     {
       "package": "googlechrome/modern-web-guidance",
       "skills": ["modern-web-guidance"]
+    },
+    {
+      "package": "xxsnakerxx/skills",
+      "skills": ["create-pr", "review-fixes"]
     }
   ]
 }
