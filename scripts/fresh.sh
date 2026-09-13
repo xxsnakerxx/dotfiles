@@ -26,9 +26,9 @@ go_home
 fix_permissions
 install_oh_my_zsh
 install_brew_bundle
+install_asdf_tools
 install_skills
 reload_zsh
-install_asdf_tools
 
 if yes_no_input "Do you want to setup macOS?"; then
   setup_macos

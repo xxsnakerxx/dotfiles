@@ -1,5 +1,6 @@
 install_skills() {
   info "Installing skills from .skills.json..."
+  export PATH="$HOME/.asdf/shims:$PATH"
   local skills_file="$DOTFILES_ROOT/.skills.json"
   local row package agents skill
   local skill_flags=()
