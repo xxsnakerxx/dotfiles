@@ -22,6 +22,7 @@ setup_touch_id_for_sudo
 install_brew
 install_stow
 stow_files
+link_agent_rules
 go_home
 fix_permissions
 install_oh_my_zsh

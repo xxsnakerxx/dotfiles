@@ -103,6 +103,15 @@ stow_files() {
   success "Files stowed"
 }
 
+link_agent_rules() {
+  info "Linking agent rules..."
+  local rules="$DOTFILES_ROOT/AGENTS.md"
+  mkdir -p "$HOME/.claude" "$HOME/.config/opencode"
+  ln -sf "$rules" "$HOME/.claude/CLAUDE.md"
+  ln -sf "$rules" "$HOME/.config/opencode/AGENTS.md"
+  success "Agent rules linked"
+}
+
 clean_up() {
   info "Cleaning up..."
   mo clean
