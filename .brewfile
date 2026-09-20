@@ -1,6 +1,7 @@
 brew "anomalyco/tap/opencode"
 brew "asdf"
 brew "curl"
+brew "exiftool"
 brew "ffmpeg"
 brew "fswatch"
 brew "gh"
