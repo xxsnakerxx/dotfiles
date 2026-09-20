@@ -6,6 +6,7 @@ Applies to every project. Project-specific rules live in the project's own AGENT
 
 - Read the official docs before using any library API — never write API shapes from memory
 - Never present an assumption as fact. If the codebase can't prove it — API response shapes, which fields arrive on which status, backend behaviour — ask before writing code or comments that depend on it
+- This holds for claims about our own code too: a comment may state only what the construct actually enforces, never the failure it feels like it prevents. Before writing "so X can't happen", find the path where X still happens — if it exists, the claim is wrong
 - If a fix must ship before the answer arrives: implement the conservative branch, say plainly "unverified — assumed X", and list it as a manual check. Never write an unverified claim into a code comment
 - If the same question has been re-examined more than twice without a clear answer, stop and ask — with a short summary of the tradeoff and a recommendation, not an exhaustive survey
 
