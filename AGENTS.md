@@ -38,6 +38,12 @@ Applies to every project. Project-specific rules live in the project's own AGENT
 - Multiple independent changesets pending (e.g. staged code vs. untracked docs) → one message per changeset, not a merged one
 - Never run `git commit` unless explicitly asked; just propose the text
 
+## Git worktrees
+
+- Worktrees belong to `worktrunk`, binary `wt` — `git worktree add` stays out of it. Syntax: `wt --help`, `wt <command> --help`
+- `wt` puts a worktree beside the repo, outside the bash sandbox, so creating one or working in it is the user's move. Hand over the command: `! wt switch --create <branch> -x <agent> -- '<prompt>'` starts a session in the new branch
+- Per-worktree setup — dependencies, gitignored env files, codegen — belongs in a `pre-start` hook in the project's `.config/wt.toml`
+
 ## Feature → PR workflow
 
 Default pipeline for a feature branch, unless the task says otherwise:
