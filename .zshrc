@@ -33,6 +33,7 @@ export PATH="$HOME/.docker/bin:$PATH"
 alias zsh_config="code ~/.zshrc"
 alias zsh_reload="source ~/.zshrc"
 alias dotup="bash ~/.dotfiles/scripts/update.sh"
+alias upscale="bash $HOME/My\ Drive/scripts/upscale-exif.sh"
 
 export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
@@ -57,6 +58,9 @@ export PATH=$PATH:$(go env GOPATH)/bin
 export PATH="/opt/homebrew/opt/curl/bin:$PATH"
 export LDFLAGS="-L/opt/homebrew/opt/curl/lib"
 export CPPFLAGS="-I/opt/homebrew/opt/curl/include"
+
+# worktrunk
+eval "$(wt config shell init zsh)"
 
 if [ -f ~/.zshrc.local.sh ]; then
     source ~/.zshrc.local.sh
