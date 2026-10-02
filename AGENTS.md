@@ -14,6 +14,11 @@ Applies to every project. Project-specific rules live in the project's own AGENT
 
 - Before deciding to implement something — a helper, a script, a library, a CI step — search the web for an existing ready-made solution (a package, a GitHub Action, a service) and propose it. Hand-rolling what already exists is the most common avoidable work. Build only when nothing fits or a dependency is explicitly unwanted.
 
+## Test-driven development
+
+- For logic that is unit-testable (pure functions, formatters, state transitions), write the failing test before the implementation and make it pass — not tests written after the fact to match code
+- Where a red test adds nothing (wiring, markup, one-off scripts), skip the cycle; "when possible" is the bar, not an obligation
+
 ## Verification
 
 - The user walks the UI himself to verify visual changes. Never claim a visual change is verified, and never substitute a screenshot pass for it
