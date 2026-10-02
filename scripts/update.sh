@@ -5,6 +5,7 @@ DOTFILES_ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 
 . "$DOTFILES_ROOT/scripts/utils.sh"
 . "$DOTFILES_ROOT/scripts/skills.sh"
+. "$DOTFILES_ROOT/scripts/graphify.sh"
 
 _dim=$(tput dim 2>/dev/null || true)
 _yellow=$(tput setaf 3 2>/dev/null || true)
@@ -27,5 +28,8 @@ npx skills update -g -y
 
 _info "npm global update..."
 npm update -g
+
+_info "Graphify upgrade..."
+update_graphify
 
 _done "dotup complete"

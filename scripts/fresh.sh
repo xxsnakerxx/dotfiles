@@ -11,6 +11,7 @@ DOTFILES_ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 . "$DOTFILES_ROOT/scripts/zsh.sh"
 . "$DOTFILES_ROOT/scripts/asdf.sh"
 . "$DOTFILES_ROOT/scripts/skills.sh"
+. "$DOTFILES_ROOT/scripts/graphify.sh"
 . "$DOTFILES_ROOT/scripts/macos.sh"
 
 print_logo
@@ -29,6 +30,7 @@ install_oh_my_zsh
 install_brew_bundle
 install_asdf_tools
 install_skills
+install_graphify
 reload_zsh
 
 if yes_no_input "Do you want to setup macOS?"; then

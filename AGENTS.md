@@ -67,3 +67,16 @@ resolving-merge-conflicts (conflict), improve-codebase-architecture / codebase-d
 (periodic deepening), to-spec / to-tickets / wayfinder (multi-session epics).
 
 ponytail is a write-time mode, not a review step — its job is to make steps 3–4 cheaper.
+
+# graphify
+
+- **graphify** (`~/.claude/skills/graphify/SKILL.md`) - any input to knowledge graph. Trigger: `/graphify`
+  When the user types `/graphify`, use the installed graphify skill or instructions before doing anything else.
+
+When the project has `graphify-out/graph.json`, the graph is the first lookup for structural questions — before grep or an Explore agent:
+
+- Impact before a refactor or a signature change → `graphify affected "<symbol>"`
+- Whether two modules are linked → `graphify path "<A>" "<B>"`
+- Orientation in an unfamiliar area → `graphify query "<terms>" --context call`, then read only the 1–2 files it points at
+- The graph is a map, not the behaviour: values, conditions and reasons come from reading the code. Component script blocks (`.svelte`, `.vue`) can be missing from it — a symbol it can't find there still gets a grep
+- Freshness first: the report's "Built from commit" against `git rev-parse HEAD`; on a mismatch run `graphify update .` (AST only, no tokens)

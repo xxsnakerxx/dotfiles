@@ -51,6 +51,9 @@ esac
 # asdf
 export PATH="${ASDF_DATA_DIR:-$HOME/.asdf}/shims:$PATH"
 
+# uv (graphify and other uv tools)
+export PATH="$HOME/.local/bin:$PATH"
+
 # go
 export PATH=$PATH:$(go env GOPATH)/bin
 
