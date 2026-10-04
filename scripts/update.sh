@@ -7,29 +7,22 @@ DOTFILES_ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 . "$DOTFILES_ROOT/scripts/skills.sh"
 . "$DOTFILES_ROOT/scripts/graphify.sh"
 
-_dim=$(tput dim 2>/dev/null || true)
-_yellow=$(tput setaf 3 2>/dev/null || true)
-_green=$(tput setaf 2 2>/dev/null || true)
-_reset=$(tput sgr0 2>/dev/null || true)
-
-_info()  { printf "\n%s🟡 %s%s\n" "$_yellow" "$*" "$_reset"; }
-_done()  { printf "\n%s✅ %s%s\n" "$_green"  "$*" "$_reset"; }
-_info "Brew upgrade..."
+info "Brew upgrade..."
 brew upgrade --greedy
 
-_info "Brew bundle..."
+info "Brew bundle..."
 brew bundle --verbose
 
-_info "Skills sync (install missing from .skills.json)..."
+info "Skills sync (install missing from .skills.json)..."
 sync_skills
 
-_info "Skills update (pull latest versions)..."
+info "Skills update (pull latest versions)..."
 npx skills update -g -y
 
-_info "npm global update..."
+info "npm global update..."
 npm update -g
 
-_info "Graphify upgrade..."
+info "Graphify upgrade..."
 update_graphify
 
-_done "dotup complete"
+success "dotup complete"
