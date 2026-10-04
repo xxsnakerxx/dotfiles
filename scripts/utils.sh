@@ -34,15 +34,21 @@ go_home() {
   cd ~
 }
 
-install_xcode_clt() {
-  if xcode-select -p >/dev/null 2>&1; then
-    warn "Xcode CLT already installed"
+install_if_missing() {
+  local name="$1"
+  local check="$2"
+  local install="$3"
+  if eval "$check" >/dev/null 2>&1; then
+    warn "$name already installed"
   else
-    info "Installing Xcode CLT..."
-    xcode-select --install
-    sudo xcodebuild -license accept
-    success "Xcode CLT installed successfully"
+    info "Installing $name..."
+    eval "$install"
+    success "$name installed successfully"
   fi
+}
+
+install_xcode_clt() {
+  install_if_missing "Xcode CLT" "xcode-select -p" "xcode-select --install && sudo xcodebuild -license accept"
 }
 
 update_system() {

@@ -1,13 +1,6 @@
 install_oh_my_zsh() {
-  if [[ ! -d "${HOME}/.oh-my-zsh" ]]; then
-    info "Installing Oh My Zsh..."
-    sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
-    success "Oh My Zsh installed"
-
-    install_oh_my_zsh_plugins
-  else
-    warn "Oh My Zsh already installed"
-  fi
+  install_if_missing "Oh My Zsh" '[[ -d "${HOME}/.oh-my-zsh" ]]' \
+    'sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended && install_oh_my_zsh_plugins'
 }
 
 install_oh_my_zsh_plugins() {
@@ -26,11 +19,7 @@ clone_zsh_plugin() {
   local url="$1"
   local name="$2"
 
-  if [[ ! -d "${ZSH_CUSTOM}/plugins/${name}" ]]; then
-    info "Cloning ${name} plugin..."
-    git clone "${url}" "${ZSH_CUSTOM}/plugins/${name}"
-    success "${name} plugin cloned"
-  else
-    warn "${name} plugin already cloned"
-  fi
+  install_if_missing "${name} plugin" \
+    "[[ -d \"${ZSH_CUSTOM}/plugins/${name}\" ]]" \
+    "git clone \"${url}\" \"${ZSH_CUSTOM}/plugins/${name}\""
 }
