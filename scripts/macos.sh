@@ -4,6 +4,16 @@ LOCALE="en_US@currency=EUR"
 MEASUREMENT_UNITS="Centimeters"
 SCREENSHOTS_FOLDER="${HOME}/Desktop"
 
+# Applies "domain|key|type|value|description" rows via `defaults write`.
+# The trailing description field is documentation only; it is not emitted.
+apply_defaults() {
+  local entry domain key type value description
+  for entry in "$@"; do
+    IFS='|' read -r domain key type value description <<< "$entry"
+    defaults write "$domain" "$key" "$type" "$value"
+  done
+}
+
 setup_macos() {
   info "Setting up macOS..."
 
@@ -47,19 +57,21 @@ setup_localization() {
 
   # Set language and text formats
   defaults write NSGlobalDomain AppleLanguages -array ${LANGUAGES[@]}
-  defaults write NSGlobalDomain AppleLocale -string "$LOCALE"
-  defaults write NSGlobalDomain AppleMeasurementUnits -string "$MEASUREMENT_UNITS"
-  defaults write NSGlobalDomain AppleMetricUnits -bool true
+  apply_defaults \
+    "NSGlobalDomain|AppleLocale|-string|$LOCALE|Set language and text formats" \
+    "NSGlobalDomain|AppleMeasurementUnits|-string|$MEASUREMENT_UNITS|Set language and text formats" \
+    "NSGlobalDomain|AppleMetricUnits|-bool|true|Set language and text formats"
 
   # Set the time zone
   sudo defaults write /Library/Preferences/com.apple.timezone.auto Active -bool YES
   sudo systemsetup -setusingnetworktime on
 
   # Use 24-hour time format in menu bar (day of week, no date)
-  defaults write com.apple.menuextra.clock Show24Hour -bool true
-  defaults write com.apple.menuextra.clock ShowAMPM -bool false
-  defaults write com.apple.menuextra.clock ShowDate -int 0
-  defaults write com.apple.menuextra.clock ShowDayOfWeek -bool true
+  apply_defaults \
+    "com.apple.menuextra.clock|Show24Hour|-bool|true|Use 24-hour time format in menu bar" \
+    "com.apple.menuextra.clock|ShowAMPM|-bool|false|Use 24-hour time format in menu bar" \
+    "com.apple.menuextra.clock|ShowDate|-int|0|Use 24-hour time format in menu bar" \
+    "com.apple.menuextra.clock|ShowDayOfWeek|-bool|true|Use 24-hour time format in menu bar"
   kill -SIGHUP SystemUIServer 2>/dev/null || true
 
   success "Localization setup completed"
@@ -87,34 +99,18 @@ setup_system() {
   # Menu bar: show battery percentage
   defaults write com.apple.menuextra.battery ShowPercent YES
 
-  # Disable opening and closing window animations
-  defaults write NSGlobalDomain NSAutomaticWindowAnimationsEnabled -bool false
-
-  # Increase window resize speed for Cocoa applications
-  defaults write NSGlobalDomain NSWindowResizeTime -float 0.001
-
-  # Expand save panel by default
-  defaults write NSGlobalDomain NSNavPanelExpandedStateForSaveMode -bool true
-  defaults write NSGlobalDomain NSNavPanelExpandedStateForSaveMode2 -bool true
-
-  # Expand print panel by default
-  defaults write NSGlobalDomain PMPrintingExpandedStateForPrint -bool true
-  defaults write NSGlobalDomain PMPrintingExpandedStateForPrint2 -bool true
-
-  # Save to disk (not to iCloud) by default
-  defaults write NSGlobalDomain NSDocumentSaveNewDocumentsToCloud -bool false
-
-  # Automatically quit printer app once the print jobs complete
-  defaults write com.apple.print.PrintingPrefs "Quit When Finished" -bool true
-
-  # Disable the “Are you sure you want to open this application?” dialog
-  defaults write com.apple.LaunchServices LSQuarantine -bool false
-
-  # Disable Resume system-wide
-  defaults write com.apple.systempreferences NSQuitAlwaysKeepsWindows -bool false
-
-  # Disable the crash reporter
-  defaults write com.apple.CrashReporter DialogType -string "none"
+  apply_defaults \
+    "NSGlobalDomain|NSAutomaticWindowAnimationsEnabled|-bool|false|Disable opening and closing window animations" \
+    "NSGlobalDomain|NSWindowResizeTime|-float|0.001|Increase window resize speed for Cocoa applications" \
+    "NSGlobalDomain|NSNavPanelExpandedStateForSaveMode|-bool|true|Expand save panel by default" \
+    "NSGlobalDomain|NSNavPanelExpandedStateForSaveMode2|-bool|true|Expand save panel by default" \
+    "NSGlobalDomain|PMPrintingExpandedStateForPrint|-bool|true|Expand print panel by default" \
+    "NSGlobalDomain|PMPrintingExpandedStateForPrint2|-bool|true|Expand print panel by default" \
+    "NSGlobalDomain|NSDocumentSaveNewDocumentsToCloud|-bool|false|Save to disk (not to iCloud) by default" \
+    "com.apple.print.PrintingPrefs|Quit When Finished|-bool|true|Automatically quit printer app once the print jobs complete" \
+    "com.apple.LaunchServices|LSQuarantine|-bool|false|Disable the 'Are you sure you want to open this application?' dialog" \
+    "com.apple.systempreferences|NSQuitAlwaysKeepsWindows|-bool|false|Disable Resume system-wide" \
+    "com.apple.CrashReporter|DialogType|-string|none|Disable the crash reporter"
 
   success "System setup completed"
 }
@@ -122,35 +118,18 @@ setup_system() {
 setup_keyboard() {
   info "Setting up keyboard..."
 
-  # Disable smart quotes and dashes as they’re annoying when typing code
-  defaults write NSGlobalDomain NSAutomaticQuoteSubstitutionEnabled -bool false
-  defaults write NSGlobalDomain NSAutomaticDashSubstitutionEnabled -bool false
-
-  # Enable full keyboard access for all controls
-  # (e.g. enable Tab in modal dialogs)
-  defaults write NSGlobalDomain AppleKeyboardUIMode -int 3
-
-  # Disable press-and-hold for keys in favor of key repeat
-  defaults write NSGlobalDomain ApplePressAndHoldEnabled -bool false
-
-  # Set a blazingly fast keyboard repeat rate
-  defaults write NSGlobalDomain KeyRepeat -int 2
-  defaults write NSGlobalDomain InitialKeyRepeat -int 15
-
-  # Automatically illuminate built-in MacBook keyboard in low light
-  defaults write com.apple.BezelServices kDim -bool true
-
-  # Turn off keyboard illumination when computer is not used for 5 minutes
-  defaults write com.apple.BezelServices kDimTime -int 300
-
-  # Disable auto-correct
-  defaults write NSGlobalDomain NSAutomaticSpellingCorrectionEnabled -bool false
-
-  # Press the fn key to use the special features printed on the key.
-  defaults write NSGlobalDomain com.apple.keyboard.fnState -bool true
-
-  # Switches between keyboard layouts for writing in other languages (known as input sources).
-  defaults write com.apple.HIToolbox AppleFnUsageType -int "1"
+  apply_defaults \
+    "NSGlobalDomain|NSAutomaticQuoteSubstitutionEnabled|-bool|false|Disable smart quotes (annoying when typing code)" \
+    "NSGlobalDomain|NSAutomaticDashSubstitutionEnabled|-bool|false|Disable smart dashes (annoying when typing code)" \
+    "NSGlobalDomain|AppleKeyboardUIMode|-int|3|Enable full keyboard access for all controls (e.g. enable Tab in modal dialogs)" \
+    "NSGlobalDomain|ApplePressAndHoldEnabled|-bool|false|Disable press-and-hold for keys in favor of key repeat" \
+    "NSGlobalDomain|KeyRepeat|-int|2|Set a blazingly fast keyboard repeat rate" \
+    "NSGlobalDomain|InitialKeyRepeat|-int|15|Set a blazingly fast keyboard repeat rate" \
+    "com.apple.BezelServices|kDim|-bool|true|Automatically illuminate built-in MacBook keyboard in low light" \
+    "com.apple.BezelServices|kDimTime|-int|300|Turn off keyboard illumination when computer is not used for 5 minutes" \
+    "NSGlobalDomain|NSAutomaticSpellingCorrectionEnabled|-bool|false|Disable auto-correct" \
+    "NSGlobalDomain|com.apple.keyboard.fnState|-bool|true|Press the fn key to use the special features printed on the key" \
+    "com.apple.HIToolbox|AppleFnUsageType|-int|1|Switch between keyboard layouts for other languages (input sources)"
 
   success "Keyboard setup completed"
 }
@@ -159,21 +138,26 @@ setup_trackpad() {
   info "Setting up trackpad..."
 
   # Trackpad: enable tap to click for this user and for the login screen
-  defaults write com.apple.AppleMultitouchTrackpad Clicking -bool true
-  defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad Clicking -bool true
+  apply_defaults \
+    "com.apple.AppleMultitouchTrackpad|Clicking|-bool|true|Trackpad: enable tap to click for this user and for the login screen" \
+    "com.apple.driver.AppleBluetoothMultitouch.trackpad|Clicking|-bool|true|Trackpad: enable tap to click for this user and for the login screen"
   defaults -currentHost write NSGlobalDomain com.apple.mouse.tapBehavior -int 1
-  defaults write NSGlobalDomain com.apple.mouse.tapBehavior -int 1
+  apply_defaults \
+    "NSGlobalDomain|com.apple.mouse.tapBehavior|-int|1|Trackpad: enable tap to click"
 
   # Trackpad: map bottom right corner to right-click
-  defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadCornerSecondaryClick -int 2
-  defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadRightClick -bool true
+  apply_defaults \
+    "com.apple.driver.AppleBluetoothMultitouch.trackpad|TrackpadCornerSecondaryClick|-int|2|Trackpad: map bottom right corner to right-click" \
+    "com.apple.driver.AppleBluetoothMultitouch.trackpad|TrackpadRightClick|-bool|true|Trackpad: map bottom right corner to right-click"
   defaults -currentHost write NSGlobalDomain com.apple.trackpad.trackpadCornerClickBehavior -int 1
   defaults -currentHost write NSGlobalDomain com.apple.trackpad.enableSecondaryClick -bool true
 
   # Trackpad: swipe between pages with three fingers
-  defaults write NSGlobalDomain AppleEnableSwipeNavigateWithScrolls -bool true
+  apply_defaults \
+    "NSGlobalDomain|AppleEnableSwipeNavigateWithScrolls|-bool|true|Trackpad: swipe between pages with three fingers"
   defaults -currentHost write NSGlobalDomain com.apple.trackpad.threeFingerHorizSwipeGesture -int 1
-  defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadThreeFingerHorizSwipeGesture -int 1
+  apply_defaults \
+    "com.apple.driver.AppleBluetoothMultitouch.trackpad|TrackpadThreeFingerHorizSwipeGesture|-int|1|Trackpad: swipe between pages with three fingers"
 
   success "Trackpad setup completed"
 }
@@ -182,21 +166,17 @@ setup_screen() {
   info "Setting up screen..."
 
   # Require password immediately after sleep or screen saver begins
-  defaults write com.apple.screensaver askForPassword -int 1
-  defaults write com.apple.screensaver askForPasswordDelay -int 0
+  apply_defaults \
+    "com.apple.screensaver|askForPassword|-int|1|Require password immediately after sleep or screen saver begins" \
+    "com.apple.screensaver|askForPasswordDelay|-int|0|Require password immediately after sleep or screen saver begins"
 
   # Save screenshots to the ~/Desktop folder
   mkdir -p "${SCREENSHOTS_FOLDER}"
-  defaults write com.apple.screencapture location -string "${SCREENSHOTS_FOLDER}"
-
-  # Save screenshots in PNG format (other options: BMP, GIF, JPG, PDF, TIFF)
-  defaults write com.apple.screencapture type -string "png"
-
-  # Disable shadow in screenshots
-  defaults write com.apple.screencapture disable-shadow -bool true
-
-  # Enable subpixel font rendering on non-Apple LCDs
-  defaults write NSGlobalDomain AppleFontSmoothing -int 2
+  apply_defaults \
+    "com.apple.screencapture|location|-string|$SCREENSHOTS_FOLDER|Save screenshots to the ~/Desktop folder" \
+    "com.apple.screencapture|type|-string|png|Save screenshots in PNG format (other options: BMP, GIF, JPG, PDF, TIFF)" \
+    "com.apple.screencapture|disable-shadow|-bool|true|Disable shadow in screenshots" \
+    "NSGlobalDomain|AppleFontSmoothing|-int|2|Enable subpixel font rendering on non-Apple LCDs"
 
   success "Screen setup completed"
 }
@@ -204,58 +184,28 @@ setup_screen() {
 setup_finder() {
   info "Setting up Finder..."
 
-  # Finder: disable window animations and Get Info animations
-  defaults write com.apple.finder DisableAllAnimations -bool true
-
-  # Finder: show hidden files by default
-  defaults write com.apple.finder AppleShowAllFiles -bool true
-
-  # Finder: show all filename extensions
-  defaults write NSGlobalDomain AppleShowAllExtensions -bool true
-
-  # Finder: show status bar
-  defaults write com.apple.finder ShowStatusBar -bool true
-
-  # Finder: show path bar
-  defaults write com.apple.finder ShowPathbar -bool true
-
-  # Finder: allow text selection in Quick Look
-  defaults write com.apple.finder QLEnableTextSelection -bool true
-
-  # Display full POSIX path as Finder window title
-  defaults write com.apple.finder _FXShowPosixPathInTitle -bool true
-
-  # Keep folders on top when sorting by name
-  defaults write com.apple.finder _FXSortFoldersFirst -bool true
-
-  # When performing a search, search the current folder by default
-  defaults write com.apple.finder FXDefaultSearchScope -string "SCcf"
-
-  # Disable the warning when changing a file extension
-  defaults write com.apple.finder FXEnableExtensionChangeWarning -bool false
-
-  # Avoid creating .DS_Store files on network or USB volumes
-  defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool true
-  defaults write com.apple.desktopservices DSDontWriteUSBStores -bool true
-
-  # Disable disk image verification
-  defaults write com.apple.frameworks.diskimages skip-verify -bool true
-  defaults write com.apple.frameworks.diskimages skip-verify-locked -bool true
-  defaults write com.apple.frameworks.diskimages skip-verify-remote -bool true
-
-  # Use AirDrop over every interface.
-  defaults write com.apple.NetworkBrowser BrowseAllInterfaces -bool true
-
-  # Always open everything in Finder's column view.
-  # Use list view in all Finder windows by default
-  # Four-letter codes for the other view modes: `icnv`, `clmv`, `Flwv`
-  defaults write com.apple.finder FXPreferredViewStyle -string "clmv"
-
-  # Disable the warning before emptying the Trash
-  defaults write com.apple.finder WarnOnEmptyTrash -bool false
+  apply_defaults \
+    "com.apple.finder|DisableAllAnimations|-bool|true|Finder: disable window animations and Get Info animations" \
+    "com.apple.finder|AppleShowAllFiles|-bool|true|Finder: show hidden files by default" \
+    "NSGlobalDomain|AppleShowAllExtensions|-bool|true|Finder: show all filename extensions" \
+    "com.apple.finder|ShowStatusBar|-bool|true|Finder: show status bar" \
+    "com.apple.finder|ShowPathbar|-bool|true|Finder: show path bar" \
+    "com.apple.finder|QLEnableTextSelection|-bool|true|Finder: allow text selection in Quick Look" \
+    "com.apple.finder|_FXShowPosixPathInTitle|-bool|true|Display full POSIX path as Finder window title" \
+    "com.apple.finder|_FXSortFoldersFirst|-bool|true|Keep folders on top when sorting by name" \
+    "com.apple.finder|FXDefaultSearchScope|-string|SCcf|When performing a search, search the current folder by default" \
+    "com.apple.finder|FXEnableExtensionChangeWarning|-bool|false|Disable the warning when changing a file extension" \
+    "com.apple.desktopservices|DSDontWriteNetworkStores|-bool|true|Avoid creating .DS_Store files on network or USB volumes" \
+    "com.apple.desktopservices|DSDontWriteUSBStores|-bool|true|Avoid creating .DS_Store files on network or USB volumes" \
+    "com.apple.frameworks.diskimages|skip-verify|-bool|true|Disable disk image verification" \
+    "com.apple.frameworks.diskimages|skip-verify-locked|-bool|true|Disable disk image verification" \
+    "com.apple.frameworks.diskimages|skip-verify-remote|-bool|true|Disable disk image verification" \
+    "com.apple.NetworkBrowser|BrowseAllInterfaces|-bool|true|Use AirDrop over every interface" \
+    "com.apple.finder|FXPreferredViewStyle|-string|clmv|Always open everything in Finder's column view (other view modes: icnv, clmv, Flwv)" \
+    "com.apple.finder|WarnOnEmptyTrash|-bool|false|Disable the warning before emptying the Trash"
 
   # Expand the following File Info panes:
-  # “General”, “Open with”, and “Sharing & Permissions”
+  # "General", "Open with", and "Sharing & Permissions"
   defaults write com.apple.finder FXInfoPanesExpanded -dict General -bool true OpenWith -bool true Privileges -bool true
 
   success "Finder setup completed"
@@ -264,29 +214,17 @@ setup_finder() {
 setup_dock() {
   info "Setting up dock..."
 
-  # Show indicator lights for open applications in the Dock
-  defaults write com.apple.dock show-process-indicators -bool true
-
-  # Don’t animate opening applications from the Dock
-  defaults write com.apple.dock launchanim -bool false
-
-  # Automatically hide and show the Dock
-  defaults write com.apple.dock autohide -bool false
-
-  # Make Dock icons of hidden applications translucent
-  defaults write com.apple.dock showhidden -bool true
-
-  # No bouncing icons
-  defaults write com.apple.dock no-bouncing -bool false
-
-  # Disable hot corners
-  defaults write com.apple.dock wvous-tl-corner -int 0
-  defaults write com.apple.dock wvous-tr-corner -int 0
-  defaults write com.apple.dock wvous-bl-corner -int 0
-  defaults write com.apple.dock wvous-br-corner -int 0
-
-  # Don't show recently used applications in the Dock
-  defaults write com.apple.dock show-recents -bool false
+  apply_defaults \
+    "com.apple.dock|show-process-indicators|-bool|true|Show indicator lights for open applications in the Dock" \
+    "com.apple.dock|launchanim|-bool|false|Don't animate opening applications from the Dock" \
+    "com.apple.dock|autohide|-bool|false|Automatically hide and show the Dock" \
+    "com.apple.dock|showhidden|-bool|true|Make Dock icons of hidden applications translucent" \
+    "com.apple.dock|no-bouncing|-bool|false|No bouncing icons" \
+    "com.apple.dock|wvous-tl-corner|-int|0|Disable hot corners" \
+    "com.apple.dock|wvous-tr-corner|-int|0|Disable hot corners" \
+    "com.apple.dock|wvous-bl-corner|-int|0|Disable hot corners" \
+    "com.apple.dock|wvous-br-corner|-int|0|Disable hot corners" \
+    "com.apple.dock|show-recents|-bool|false|Don't show recently used applications in the Dock"
 
   success "Dock setup completed"
 }
@@ -294,11 +232,9 @@ setup_dock() {
 setup_calendar() {
   info "Setting up Calendar..."
 
-  # Show week numbers (10.8 only)
-  defaults write com.apple.iCal "Show Week Numbers" -bool true
-
-  # Week starts on monday
-  defaults write com.apple.iCal "first day of week" -int 1
+  apply_defaults \
+    "com.apple.iCal|Show Week Numbers|-bool|true|Show week numbers (10.8 only)" \
+    "com.apple.iCal|first day of week|-int|1|Week starts on monday"
 
   success "Calendar setup completed"
 }
@@ -310,9 +246,10 @@ setup_terminal() {
   defaults write com.apple.terminal StringEncodings -array 4
 
   # Appearance
-  defaults write com.apple.terminal "Default Window Settings" -string "Pro"
-  defaults write com.apple.terminal "Startup Window Settings" -string "Pro"
-  defaults write com.apple.Terminal ShowLineMarks -int 0
+  apply_defaults \
+    "com.apple.terminal|Default Window Settings|-string|Pro|Appearance" \
+    "com.apple.terminal|Startup Window Settings|-string|Pro|Appearance" \
+    "com.apple.Terminal|ShowLineMarks|-int|0|Appearance"
 
   success "Terminal setup completed"
 }
@@ -320,18 +257,12 @@ setup_terminal() {
 setup_activity_monitor() {
   info "Setting up Activity Monitor..."
 
-  # Show the main window when launching Activity Monitor
-  defaults write com.apple.ActivityMonitor OpenMainWindow -bool true
-
-  # Visualize CPU usage in the Activity Monitor Dock icon
-  defaults write com.apple.ActivityMonitor IconType -int 5
-
-  # Show all processes in Activity Monitor
-  defaults write com.apple.ActivityMonitor ShowCategory -int 0
-
-  # Sort Activity Monitor results by CPU usage
-  defaults write com.apple.ActivityMonitor SortColumn -string "CPUUsage"
-  defaults write com.apple.ActivityMonitor SortDirection -int 0
+  apply_defaults \
+    "com.apple.ActivityMonitor|OpenMainWindow|-bool|true|Show the main window when launching Activity Monitor" \
+    "com.apple.ActivityMonitor|IconType|-int|5|Visualize CPU usage in the Activity Monitor Dock icon" \
+    "com.apple.ActivityMonitor|ShowCategory|-int|0|Show all processes in Activity Monitor" \
+    "com.apple.ActivityMonitor|SortColumn|-string|CPUUsage|Sort Activity Monitor results by CPU usage" \
+    "com.apple.ActivityMonitor|SortDirection|-int|0|Sort Activity Monitor results by CPU usage"
 
   success "Activity Monitor setup completed"
 }
@@ -339,23 +270,13 @@ setup_activity_monitor() {
 setup_system_updates() {
   info "Setting up system updates..."
 
-  # Enable the automatic update check
-  defaults write com.apple.SoftwareUpdate AutomaticCheckEnabled -bool true
-
-  # Check for software updates weekly (`dot update` includes software updates)
-  defaults write com.apple.SoftwareUpdate ScheduleFrequency -string 7
-
-  # Download newly available updates in background
-  defaults write com.apple.SoftwareUpdate AutomaticDownload -bool true
-
-  # Install System data files & security updates
-  defaults write com.apple.SoftwareUpdate CriticalUpdateInstall -bool true
-
-  # Turn on app auto-update
-  defaults write com.apple.commerce AutoUpdate -bool true
-
-  # Allow the App Store to reboot machine on macOS updates
-  defaults write com.apple.commerce AutoUpdateRestartRequired -bool true
+  apply_defaults \
+    "com.apple.SoftwareUpdate|AutomaticCheckEnabled|-bool|true|Enable the automatic update check" \
+    "com.apple.SoftwareUpdate|ScheduleFrequency|-string|7|Check for software updates weekly (dot update includes software updates)" \
+    "com.apple.SoftwareUpdate|AutomaticDownload|-bool|true|Download newly available updates in background" \
+    "com.apple.SoftwareUpdate|CriticalUpdateInstall|-bool|true|Install System data files & security updates" \
+    "com.apple.commerce|AutoUpdate|-bool|true|Turn on app auto-update" \
+    "com.apple.commerce|AutoUpdateRestartRequired|-bool|true|Allow the App Store to reboot machine on macOS updates"
 
   success "System updates setup completed"
 }
