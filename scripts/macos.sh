@@ -1,3 +1,4 @@
+# shellcheck shell=bash
 COMPUTER_NAME="Dimkol-Mac"
 LANGUAGES=(en pl)
 LOCALE="en_US@currency=EUR"
@@ -9,6 +10,7 @@ SCREENSHOTS_FOLDER="${HOME}/Desktop"
 apply_defaults() {
   local entry domain key type value description
   for entry in "$@"; do
+    # shellcheck disable=SC2034 # description field is documentation-only
     IFS='|' read -r domain key type value description <<< "$entry"
     defaults write "$domain" "$key" "$type" "$value"
   done
@@ -56,6 +58,7 @@ setup_localization() {
   info "Setting up localization..."
 
   # Set language and text formats
+  # shellcheck disable=SC2068 # intentional word-splitting
   defaults write NSGlobalDomain AppleLanguages -array ${LANGUAGES[@]}
   apply_defaults \
     "NSGlobalDomain|AppleLocale|-string|$LOCALE|Set language and text formats" \

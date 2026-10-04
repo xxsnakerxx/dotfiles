@@ -1,4 +1,6 @@
+# shellcheck shell=bash
 install_oh_my_zsh() {
+  # shellcheck disable=SC2016 # defer expansion to eval
   install_if_missing "Oh My Zsh" '[[ -d "${HOME}/.oh-my-zsh" ]]' \
     'sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended && install_oh_my_zsh_plugins'
 }

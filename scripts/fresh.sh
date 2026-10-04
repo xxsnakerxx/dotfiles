@@ -24,6 +24,7 @@ install_brew
 install_stow
 stow_files
 link_agent_rules
+setup_git_hooks
 go_home
 fix_permissions
 install_oh_my_zsh

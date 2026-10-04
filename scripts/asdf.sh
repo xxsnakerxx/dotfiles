@@ -1,3 +1,4 @@
+# shellcheck shell=bash
 install_asdf_tools() {
   info "Installing ASDF tools..."
 

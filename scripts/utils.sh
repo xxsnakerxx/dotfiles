@@ -19,7 +19,7 @@ yes_no_input() {
     return 0
   fi
 
-  read -p "$1 (y/n): " answer
+  read -r -p "$1 (y/n): " answer
   if [ "$answer" != "y" ]; then
     if [ "${2:-}" == "exit" ]; then
       err "Aborting..."
@@ -31,7 +31,7 @@ yes_no_input() {
 }
 
 go_home() {
-  cd ~
+  cd ~ || return
 }
 
 install_if_missing() {
@@ -101,6 +101,7 @@ stow_files() {
     [ -e "$name" ] || continue
     [ "$name" = "." ] || [ "$name" = ".." ] && continue
     echo "$ignore_list" | grep -qFx "$name" && continue
+    # shellcheck disable=SC2115 # $name is a non-empty glob entry (`.`/`..` skipped above)
     [ -e "$HOME/$name" ] && [ ! -d "$HOME/$name" ] && rm -rf "$HOME/$name"
   done
 
@@ -116,6 +117,12 @@ link_agent_rules() {
   ln -sf "$rules" "$HOME/.claude/CLAUDE.md"
   ln -sf "$rules" "$HOME/.config/opencode/AGENTS.md"
   success "Agent rules linked"
+}
+
+setup_git_hooks() {
+  info "Configuring git hooks..."
+  git -C "$DOTFILES_ROOT" config core.hooksPath .githooks
+  success "Git hooks configured"
 }
 
 clean_up() {

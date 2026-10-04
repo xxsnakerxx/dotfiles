@@ -1,3 +1,4 @@
+# shellcheck shell=bash
 manifest_agents()  { jq -r '.agents | join(",")' "$DOTFILES_ROOT/.skills.json"; }
 manifest_sources() { jq -c '.sources[]'       "$DOTFILES_ROOT/.skills.json"; }
 

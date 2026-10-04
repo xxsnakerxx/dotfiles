@@ -1,4 +1,5 @@
 .git
+.githooks
 .DS_Store
 LICENSE
 README.md

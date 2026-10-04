@@ -31,6 +31,12 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v5
 
+      - name: Lint shell scripts
+        shell: zsh {0}
+        run: |
+          brew install shellcheck
+          bash "$GITHUB_WORKSPACE/scripts/lint.sh"
+
       - name: Clone repo to home (simulate user setup)
         shell: zsh {0}
         run: |
