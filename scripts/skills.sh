@@ -1,22 +1,25 @@
+manifest_agents()  { jq -r '.agents | join(",")' "$DOTFILES_ROOT/.skills.json"; }
+manifest_sources() { jq -c '.sources[]'       "$DOTFILES_ROOT/.skills.json"; }
+
 install_skills() {
   info "Installing skills from .skills.json..."
   export PATH="$HOME/.asdf/shims:$PATH"
-  local skills_file="$DOTFILES_ROOT/.skills.json"
-  local row package agents skill
+  local agents row package skill
   local skill_flags=()
 
-  for row in $(jq -c '.sources[]' "$skills_file"); do
+  agents=$(manifest_agents)
+
+  while IFS= read -r row; do
     skill_flags=()
 
-    package=$(echo "$row" | jq -r '.package')
-    agents=$(jq -r '.agents | join(",")' "$skills_file")
+    package=$(jq -r '.package' <<< "$row")
 
     while IFS= read -r skill; do
       skill_flags+=(-s "$skill")
-    done <<< "$(echo "$row" | jq -r '.skills[]')"
+    done < <(jq -r '.skills[]' <<< "$row")
 
     npx skills add "$package" -g "${skill_flags[@]}" -a "$agents" -y
-  done
+  done < <(manifest_sources)
 
   success "Skills installed"
 }
@@ -31,11 +34,10 @@ skill_lock_file() {
 
 sync_skills() {
   info "Syncing skills from .skills.json..."
-  local skills_file="$DOTFILES_ROOT/.skills.json"
   local lock_file agents row package skill
   local missing_flags=()
 
-  agents=$(jq -r '.agents | join(",")' "$skills_file")
+  agents=$(manifest_agents)
   lock_file="$(skill_lock_file)"
 
   if [[ ! -f "$lock_file" ]]; then
@@ -44,21 +46,21 @@ sync_skills() {
     return
   fi
 
-  for row in $(jq -c '.sources[]' "$skills_file"); do
-    package=$(echo "$row" | jq -r '.package')
+  while IFS= read -r row; do
+    package=$(jq -r '.package' <<< "$row")
     missing_flags=()
 
     while IFS= read -r skill; do
       missing_flags+=(-s "$skill")
     done < <(comm -23 \
-      <(echo "$row" | jq -r '.skills[]' | sort) \
+      <(jq -r '.skills[]' <<< "$row" | sort) \
       <(jq -r --arg p "$package" '.skills | to_entries[] | select(.value.source == $p) | .key' "$lock_file" | sort))
 
     if [[ ${#missing_flags[@]} -gt 0 ]]; then
       info "Installing missing skills from $package"
       npx skills add "$package" -g "${missing_flags[@]}" -a "$agents" -y
     fi
-  done
+  done < <(manifest_sources)
 
   success "Skills synced"
 }
