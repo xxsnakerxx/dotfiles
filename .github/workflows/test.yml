@@ -20,6 +20,16 @@ jobs:
     runs-on: macos-26
 
     steps:
+      - name: Checkout code
+        uses: actions/checkout@v5
+
+      - name: Lint shell scripts
+        shell: zsh {0}
+        run: |
+          set -e
+          brew install shellcheck
+          bash "$GITHUB_WORKSPACE/scripts/lint.sh"
+
       - name: Clean up installed software
         shell: zsh {0}
         run: |
@@ -27,15 +37,6 @@ jobs:
           brew uninstall --cask --force $(brew list --cask)
           brew cleanup --prune-prefix
           /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/uninstall.sh)"
-
-      - name: Checkout code
-        uses: actions/checkout@v5
-
-      - name: Lint shell scripts
-        shell: zsh {0}
-        run: |
-          brew install shellcheck
-          bash "$GITHUB_WORKSPACE/scripts/lint.sh"
 
       - name: Clone repo to home (simulate user setup)
         shell: zsh {0}
