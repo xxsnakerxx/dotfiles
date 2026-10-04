@@ -6,9 +6,9 @@
       "skills": [
         "ask-matt", "code-review", "codebase-design", "diagnosing-bugs",
         "domain-modeling", "grill-me", "grill-with-docs",
-        "grilling", "handoff", "implement", "improve-codebase-architecture",
-        "prototype", "research", "resolving-merge-conflicts",
-        "setup-matt-pocock-skills", "tdd", "teach", "to-questionnaire",
+        "grilling", "handoff", "implement", "implement-spec",
+        "improve-codebase-architecture", "pr", "prototype", "research",
+        "retro", "setup-matt-pocock-skills", "tdd", "teach", "to-questionnaire",
         "to-spec", "to-tickets", "triage", "wait-what", "wayfinder",
         "wizard", "writing-for-agents"
       ]
