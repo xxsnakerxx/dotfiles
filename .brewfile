@@ -1,4 +1,4 @@
-brew "anomalyco/tap/opencode"
+brew "anomalyco/tap/opencode-v2"
 brew "asdf"
 brew "curl"
 brew "exiftool"
