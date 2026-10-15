@@ -18,6 +18,7 @@ Applies to every project. Project-specific rules live in the project's own AGENT
 
 - For logic that is unit-testable (pure functions, formatters, state transitions), write the failing test before the implementation and make it pass — not tests written after the fact to match code
 - Where a red test adds nothing (wiring, markup, one-off scripts), skip the cycle; "when possible" is the bar, not an obligation
+- A red counts once it fails for the reason under test: the symbols the test names exist first, or `toBe(MISSING.KEY)` passes on `undefined === undefined`
 
 ## Verification
 
@@ -30,6 +31,10 @@ Applies to every project. Project-specific rules live in the project's own AGENT
 - If a command is denied by the sandbox or needs something unavailable (docker daemon, a login, a network host), don't silently downgrade to reasoning or drop the check. Hand the user a copy-pasteable `! <command>` and ask for the output
 - Say what the expected output looks like, so a wrong result is recognisable without reading the code
 - Until that output arrives, the thing stays "unverified" — never report it as verified
+
+## Search
+
+- Text search in Bash: `rg` (`rg -n 'x' -g '*.ts'`) — gitignore-aware, and a quoted glob survives zsh where `grep --include=*.ts` fails
 
 ## Respecting edits
 
@@ -45,9 +50,8 @@ Applies to every project. Project-specific rules live in the project's own AGENT
 
 ## Git worktrees
 
-- Worktrees belong to `worktrunk`, binary `wt` — `git worktree add` stays out of it. Syntax: `wt --help`, `wt <command> --help`
-- `wt` puts a worktree beside the repo, outside the bash sandbox, so creating one or working in it is the user's move. Hand over the command: `! wt switch --create <branch> -x <agent> -- '<prompt>'` starts a session in the new branch
-- Per-worktree setup — dependencies, gitignored env files, codegen — belongs in a `pre-start` hook in the project's `.config/wt.toml`
+- Worktrees are `wt` (worktrunk; syntax in `wt --help`). They land outside the sandbox, so hand the user `! wt switch --create <branch> -x <agent> -- '<prompt>'`
+- Per-worktree setup (deps, gitignored env, codegen) goes in a `pre-start` hook in `.config/wt.toml`
 
 ## Feature → PR workflow
 
@@ -69,14 +73,5 @@ resolving-merge-conflicts (conflict), improve-codebase-architecture / codebase-d
 ponytail is a write-time mode, not a review step — its job is to make steps 3–4 cheaper.
 
 # graphify
-
 - **graphify** (`~/.claude/skills/graphify/SKILL.md`) - any input to knowledge graph. Trigger: `/graphify`
-  When the user types `/graphify`, use the installed graphify skill or instructions before doing anything else.
-
-When the project has `graphify-out/graph.json`, the graph is the first lookup for structural questions — before grep or an Explore agent:
-
-- Impact before a refactor or a signature change → `graphify affected "<symbol>"`
-- Whether two modules are linked → `graphify path "<A>" "<B>"`
-- Orientation in an unfamiliar area → `graphify query "<terms>" --context call`, then read only the 1–2 files it points at
-- The graph is a map, not the behaviour: values, conditions and reasons come from reading the code. Component script blocks (`.svelte`, `.vue`) can be missing from it — a symbol it can't find there still gets a grep
-- Freshness first: the report's "Built from commit" against `git rev-parse HEAD`; on a mismatch run `graphify update .` (AST only, no tokens)
+When the user types `/graphify`, use the installed graphify skill or instructions before doing anything else.
