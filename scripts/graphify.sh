@@ -7,5 +7,7 @@ install_graphify() {
 update_graphify() {
   info "Upgrading graphify..."
   uv tool upgrade graphifyy
+  graphify install --platform claude
+  graphify install --platform agents
   success "graphify upgraded"
 }
