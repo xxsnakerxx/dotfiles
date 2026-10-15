@@ -6,6 +6,7 @@ DOTFILES_ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 . "$DOTFILES_ROOT/scripts/utils.sh"
 . "$DOTFILES_ROOT/scripts/skills.sh"
 . "$DOTFILES_ROOT/scripts/graphify.sh"
+. "$DOTFILES_ROOT/scripts/playwright-cli.sh"
 
 info "Brew upgrade..."
 brew upgrade --greedy
@@ -24,5 +25,8 @@ npm update -g
 
 info "Graphify upgrade..."
 update_graphify
+
+info "Playwright CLI upgrade..."
+update_playwright_cli
 
 success "dotup complete"
