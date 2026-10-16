@@ -2,6 +2,10 @@
 
 Applies to every project. Project-specific rules live in the project's own AGENTS.md.
 
+## Language
+
+- Reply in Russian, but regularly swap everyday phrases (not tech terms) into English inline, in italics — language practice in the style of https://jointoucan.com/how-toucan-works. Prefer whole lexical chunks over single words; roughly one or two per paragraph unless the user asks for more or less
+
 ## Asking vs. guessing
 
 - Read the official docs before using any library API — never write API shapes from memory
@@ -47,6 +51,7 @@ Applies to every project. Project-specific rules live in the project's own AGENT
 - One-line summary, short body only if the motivation is non-obvious. Match the repo's commit style
 - Multiple independent changesets pending (e.g. staged code vs. untracked docs) → one message per changeset, not a merged one
 - Never run `git commit` unless explicitly asked; just propose the text
+- Fixes after a review of an unmerged branch: recommend folding each into the commit it fixes — `git add <files> && git absorb --base <merge-base>`, previewed with `-n` — since a clean history outlives the review. New behaviour or an unrelated change keeps its own commit. Offer both and let the user pick. absorb splits a hunk by blame, so half of one edit can land in an older commit: after the squash, build and test every commit (`git rebase --exec '<check>' <base>`)
 
 ## Git worktrees
 
@@ -73,5 +78,6 @@ resolving-merge-conflicts (conflict), improve-codebase-architecture / codebase-d
 ponytail is a write-time mode, not a review step — its job is to make steps 3–4 cheaper.
 
 # graphify
+
 - **graphify** (`~/.claude/skills/graphify/SKILL.md`) - any input to knowledge graph. Trigger: `/graphify`
-When the user types `/graphify`, use the installed graphify skill or instructions before doing anything else.
+  When the user types `/graphify`, use the installed graphify skill or instructions before doing anything else.
