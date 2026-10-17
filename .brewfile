@@ -33,6 +33,7 @@ brew "xz"
 
 cask "android-studio", greedy: true
 cask "claude-code", greedy: true
+cask "clop", greedy: true
 cask "dictionaries", greedy: true
 cask "firefox", greedy: true
 cask "font-cascadia-code", greedy: true
@@ -61,7 +62,6 @@ cask "zoom", greedy: true
 cask "zulu@17", greedy: true
 
 mas "Flow: Focus & Pomodoro Timer", id: 1423210932
-mas "Image2WebP - Image Converter", id: 6670599252
 mas "Xcode", id: 497799835
 
 vscode "anthropic.claude-code"
