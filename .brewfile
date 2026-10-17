@@ -39,6 +39,7 @@ cask "font-cascadia-code", greedy: true
 cask "google-chrome", greedy: true
 cask "google-drive", greedy: true
 cask "handbrake-app", greedy: true
+cask "handy", greedy: true
 cask "iina", greedy: true
 cask "iterm2", greedy: true
 cask "libreoffice", greedy: true
