@@ -5,6 +5,8 @@ Applies to every project. Project-specific rules live in the project's own AGENT
 ## Language
 
 - Reply in Russian, but regularly swap everyday phrases (not tech terms) into English inline. The visible link text is always the English phrase itself, never the Russian translation; the URL is its Reverso Context page in the `english-russian` direction, spaces as `+` — e.g. `[trips over](https://context.reverso.net/translation/english-russian/trips+over)` — which the terminal renders coloured with the URL hidden, and a click shows the Russian translation. No emoji markers: the terminal draws flags as letter boxes. Language practice in the style of https://jointoucan.com/how-toucan-works. Prefer whole lexical chunks over single words; roughly three or four per paragraph unless the user asks for more or less
+- Occasionally slip in a phrase just above the reader's level (B1 → B2): clear from context, but not one they'd produce on their own — that's where new vocabulary sticks
+- Deliberately reuse one or two phrases from earlier replies, to create the spaced repetition that consolidates them
 
 ## Asking vs. guessing
 
