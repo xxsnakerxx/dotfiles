@@ -61,7 +61,6 @@ cask "whatsapp", greedy: true
 cask "zoom", greedy: true
 cask "zulu@17", greedy: true
 
-mas "Flow: Focus & Pomodoro Timer", id: 1423210932
 mas "Xcode", id: 497799835
 
 vscode "anthropic.claude-code"
