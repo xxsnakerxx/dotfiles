@@ -44,6 +44,7 @@ cask "handy", greedy: true
 cask "iina", greedy: true
 cask "iterm2", greedy: true
 cask "libreoffice", greedy: true
+cask "lookaway", greedy: true
 cask "minisim", greedy: true
 cask "mongodb-compass", greedy: true
 cask "numi", greedy: true
