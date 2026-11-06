@@ -38,7 +38,6 @@
   all = true
 
 [alias]
-  prune-local = "!git fetch -p && git branch -vv | grep ': gone]' | awk '{print $1}' | xargs git branch -D"
   branch-name = "!git branch --show-current"
 	append = town append
 	diff-parent = town diff-parent
@@ -50,6 +49,14 @@
 	sync = town sync
 	delete = town delete
 	rename = town rename
+
+  gone = "!f() { \
+    git fetch --prune && \
+    git worktree prune && \
+    git for-each-ref --format='%(refname:short)|%(upstream:track)|%(worktreepath)' refs/heads \
+      | awk -F'|' '$2 == \"[gone]\" && $3 == \"\" {print $1}' \
+      | xargs -r git branch -D; \
+  }; f"
 
 [git-town]
 	ship-delete-tracking-branch = false
