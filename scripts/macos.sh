@@ -38,6 +38,7 @@ setup_macos() {
   setup_activity_monitor
   setup_system_updates
   finish_setup
+  setup_manual_apps
 
   warn "Please restart the computer to apply all changes"
   success "macOS setup completed"
@@ -293,4 +294,9 @@ finish_setup() {
   for app in "Address Book" "Calendar" "Contacts" "Dock" "Finder" "Mail" "Safari" "SystemUIServer" "iCal"; do
     killall "${app}" &>/dev/null || true
   done
+}
+
+setup_manual_apps() {
+  info "Apps to install manually (not on Homebrew or the App Store):"
+  warn "  - TypeCorrect (https://typecorrect.com/) — keyboard-layout fixer; download the DMG and drag it to /Applications"
 }
