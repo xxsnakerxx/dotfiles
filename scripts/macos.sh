@@ -134,6 +134,9 @@ setup_keyboard() {
     "NSGlobalDomain|com.apple.keyboard.fnState|-bool|true|Press the fn key to use the special features printed on the key" \
     "com.apple.HIToolbox|AppleFnUsageType|-int|1|Switch between keyboard layouts for other languages (input sources)"
 
+  # Stop macOS from auto-switching the input source per document/window
+  defaults write com.apple.HIToolbox AppleGlobalTextInputProperties -dict TextInputGlobalPropertyPerContextInput -bool false
+
   success "Keyboard setup completed"
 }
 
